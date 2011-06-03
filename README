@@ -1,0 +1,181 @@
+#--------------------------------------------------------------------------------------
+README
+#--------------------------------------------------------------------------------------
+
+Copyright (C) 2009-2010 Pebble Bed Modular Reactor (Pty) Limited (PBMR)
+
+This program is free software: you can redistribute it and/or modify
+it under the terms of the GNU General Public License as published by
+the Free Software Foundation, either version 3 of the License, or
+(at your option) any later version.
+
+This program is distributed in the hope that it will be useful,
+but WITHOUT ANY WARRANTY; without even the implied warranty of
+MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+GNU General Public License for more details.
+
+You should have received a copy of the GNU General Public License
+along with this program.  If not, see <http://www.gnu.org/licenses/>.
+
+See https://vulashaka.svn.sourceforge.net/svnroot/vulashaka/ifoam
+
+#--------------------------------------------------------------------------------------
+Introduction
+#--------------------------------------------------------------------------------------
+
+IFoam is an OpenFOAM based calculation framework. It uses pyFoam, as the basic
+solver engine, and Python, as gluing programming language, itegrates visual
+components for limited post-processing, provides access to some GUI components
+for more efficient set up the simulation cases.
+
+
+#--------------------------------------------------------------------------------------
+Motivation 
+#--------------------------------------------------------------------------------------
+
+Engineering standard routines and research practice needs something more then
+just set of bare solvers and pre/post-processing utilities. Engineers need a
+common software environment to couple all these things together, to automate
+their work, to express all their needs in the same terms. IFoam intends to
+provide all these features and even more 
+
+  - IFoam provides direct access to the solver code (you will be able to write
+  your own custom routines) 
+
+  - IFoam allows integrate different technologies, libraries and applications
+  within the same working environment 
+
+  - IFoam allows you solve the engineering problem as the whole (you need not
+    go outside, to perform a particular task, all is within) 
+
+  - IFoam can be used as with GUI, as without (it is possible even to automate
+    GUI tasks from within) 
+
+  - IFoam is a perfect tool to accumulate your engineering experience in terms
+    of "live use-cases"
+
+
+#--------------------------------------------------------------------------------------
+Python as framework programming language 
+#--------------------------------------------------------------------------------------
+
+Usage of Python programming language brings a lot of advantages, namely 
+
+  - Python has interactive nature, you can start to your calculation right now
+  and form it in a defined procedure afterwards 
+
+  - Python code is easy to read, understand and learn to program 
+
+  - Python support all the modern programming features 
+
+    * Object Oriented Programming (classes, inheritance, virtual functions
+      e.t.c ) 
+
+    * Operators customization (user can write your own definition for '+' or
+      '-') 
+
+    * Exception based error handling 
+
+  - "Python code is typically 5-10 times shorter than equivalent C++ code" 
+
+  - "Python programmer can finish in two months what two C++ programmers can't
+    complete in a year" 
+
+  - Python comes with a vast collection of libraries (as standard, as
+    third-party) 
+
+
+#--------------------------------------------------------------------------------------
+pyFoam and IFoam relationship 
+#--------------------------------------------------------------------------------------
+
+pyFoam and IFoam stay very close together. Some times it is even difficult to
+say, where pyFoam part of functionality stops and IFoam once begins. Might be
+the following cross comparison will get you the better feeling. 
+
+  - IFoam uses pyFoam, while pyFoam not. 
+
+  - pyFoam is focused on the Python OpenFOAM wrapping, while IFoam is focused
+    on the implementation of standard engineering procedures and scenarios. 
+
+  - pyFoam helps you write and manage your solver, while IFoam solves your
+    engineering problem as the whole. 
+
+  - pyFoam is a solver development framework, IFoam is calculation
+    establishment framework. 
+
+IFoam uses pyFoam because it provides the full control over solver. But the
+most important advantage of this cooperation is that the "use-case" scripting
+and "methods" programming are performed in the same environment and, as we
+have already mentioned, "it is difficult to say where "methods" programming
+stops and "use-case" dedicated scripting begins".
+
+#--------------------------------------------------------------------------------------
+SALOME compatible 
+#--------------------------------------------------------------------------------------
+
+SALOME represents itself as "a generic platform for Pre- and Post-Processing
+for numerical simulation, which is based on an open and flexible architecture
+made of reusable components". The key SALOME feature for IFoam, is that SALOME
+provides Python interface for the most of their functionality. So, it is
+possible to access for free to such commonly used in engineering studies
+functionality as: 
+
+  - Create/modify, import/export (IGES, STEP, BREP), repair/clean CAD models 
+
+  - Mesh CAD models, edit mesh, check mesh quality, import/export mesh (MED,
+    UNV, DAT, STL) 
+
+  - Handle physical properties and quantities attached to geometrical items 
+
+  - Perform computation using one or more external solvers (coupling) 
+
+  - Display computation results (scalar, vectorial) 
+
+  - Manage studies (create, save, reload) 
+
+  - SALOME has a modular structure. To introduce a new functionality, in
+    principle, it is not necessary care ùà other modules. SALOME module can be
+    written in Python. To get direct access to all SALOME platform services
+    and features, IFoam functionality can be embedded within SALOME. It brings
+    the following seamless advantages: 
+
+    * use generic, user-friendly and efficient graphical user interface 
+
+    * be plugged-in SALOME computation scheme composer and scheduler (YACS
+      module) 
+
+    * connect to SALOME persistent features (ability save and restore
+      engineering studies) 
+
+  - IFoam integration with SALOME provides "ready-to-use" solution for
+    definition of engineering studies IDE 
+
+
+#--------------------------------------------------------------------------------------
+OpenFOAM inside 
+#--------------------------------------------------------------------------------------
+
+IFoam is OpenFOAM inspired and driven calculation framework. It starts from
+OpenFOAM use cases and still treats them as basic ones. But that is all,
+because IFoam is going to introduce a different way work organization in
+engineering practice, it is focused on optimization of the engineering
+activity, it treats the engineering activity as whole, it allows engineers
+focus on their primary goal - investigation of physics phenomena.
+
+
+#--------------------------------------------------------------------------------------
+Installation
+#--------------------------------------------------------------------------------------
+
+See the INSTALL file for more information about building of "IFoam" package.
+
+
+#--------------------------------------------------------------------------------------
+Usage
+#--------------------------------------------------------------------------------------
+
+See real-world Python cases into corresponding "IFoam/examples" folder
+
+
+#--------------------------------------------------------------------------------------

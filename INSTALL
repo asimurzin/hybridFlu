@@ -1,0 +1,126 @@
+#--------------------------------------------------------------------------------------
+Installation Instructions
+#--------------------------------------------------------------------------------------
+
+Copyright (C) 2009-2010 Pebble Bed Modular Reactor (Pty) Limited (PBMR)
+
+This program is free software: you can redistribute it and/or modify
+it under the terms of the GNU General Public License as published by
+the Free Software Foundation, either version 3 of the License, or
+(at your option) any later version.
+
+This program is distributed in the hope that it will be useful,
+but WITHOUT ANY WARRANTY; without even the implied warranty of
+MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+GNU General Public License for more details.
+
+You should have received a copy of the GNU General Public License
+along with this program.  If not, see <http://www.gnu.org/licenses/>.
+
+See https://vulashaka.svn.sourceforge.net/svnroot/vulashaka/ifoam
+
+
+#--------------------------------------------------------------------------------------
+Pre-requisites
+#--------------------------------------------------------------------------------------
+
+"IFoam" is a OpenFOAM based interactive engineering environment requires the
+ following mandatory and optional pre-requisites.
+
+* Make sure that confFoam (common configuration package) is installed 
+  Can be found at https://csrcs.pbmr.co.za/svn/nea/prototypes/reaktor/conffoam.
+  Please follow instructions from corresponding INSTALL file to setup confFoam
+  in your environment.
+
+* Make sure that OpenFOAM is installed (tested with versions 1.4.1-dev and 1.6).
+  Please follow instructions from corresponding INSTALL file to setup OpenFOAM
+  in your environment.
+
+* Make sure that pyFoam is installed (tested with release 7.4)
+  Can be found at https://csrcs.pbmr.co.za/svn/nea/prototypes/reaktor/pyfoam.
+  Please follow instructions from corresponding INSTALL file to setup pyFoam
+  in your environment.
+
+* Make sure that Python (developement version, with Python.h header file) is 
+  installed (tested with 2.4, 2.6.2) with corresponding Tkinter package
+  Please follow instructions from http://www.python.org/ web-site.
+
+* Make sure that IPython is installed (tested with releases 0.9.1 & 0.10)
+  Please follow instructions from http://www.ipython.scipy.org/ web-site.
+
+* Install foam2vtk (optional)
+  Can be found at https://csrcs.pbmr.co.za/svn/nea/prototypes/reaktor/foam2vtk.
+  Please follow instructions from corresponding INSTALL file to setup foam2vtk
+  in your environment.
+
+* Install unv2foam (optional)
+  Can be found at https://csrcs.pbmr.co.za/svn/nea/prototypes/reaktor/unv2foam.
+  Please follow instructions from corresponding INSTALL file to setup unv2foam
+  in your environment.
+
+* Install unv2foam (optional)
+  Can be found at https://csrcs.pbmr.co.za/svn/nea/prototypes/reaktor/unv2foam.
+  Please follow instructions from corresponding INSTALL file to setup unv2foam
+  in your environment.
+
+* Install Python Pmw library (optional) (tested with 1.3.2 )
+  Please follow instructions from http://www.pmw.sourceforge.net/ web-site.
+
+Then follow below instructions in order to build and install the "IFoam".
+
+
+#--------------------------------------------------------------------------------------
+Basic Installation
+#--------------------------------------------------------------------------------------
+
+The build procedure of the "IFoam" package is based on GNU autoconf and make utilities. 
+In order to build the module you have to perform the following actions:
+
+1. Go to the source directory:
+
+   cd <path to the sources>
+
+2. Modify the provided "env.sh" file to adjust to your local environment.
+   
+   <your favorite editor> ./env.sh
+
+3. Source this "env.sh" file to define corresponding build environment.
+
+   source ./env.sh
+
+4. Configuring the "IFoam" build system:
+
+   ./build_configure
+   ./configure
+
+   Make sure that after each configuration step the "--- OK ---" message is
+   printed in your console.
+
+   To see all applicable configuration options run "./configure --help"
+   Currently, the following options are available:
+
+     --with-pyfoam=<path>
+     --with-foam2vtk=<path>
+     --with-unv2foam=<path>
+     --with-foam2med=<path>
+     --with-foam2vtk=<path>
+     --with-unv2foam=<path>
+
+
+#--------------------------------------------------------------------------------------
+"IFoam" environment
+#--------------------------------------------------------------------------------------
+
+Before start to use "IFoam" it is necessary to source the generated "bashrc" file
+
+
+#--------------------------------------------------------------------------------------
+"IFoam" installation check
+#--------------------------------------------------------------------------------------
+
+Run the following "IFoam" script
+
+  ./IFoam/examples/run_examples
+
+
+#--------------------------------------------------------------------------------------

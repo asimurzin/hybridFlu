@@ -1,0 +1,51 @@
+/*--------------------------------*- C++ -*----------------------------------*\
+| =========                 |                                                 |
+| \\      /  F ield         | OpenFOAM: The Open Source CFD Toolbox           |
+|  \\    /   O peration     | Version:  1.4.1-dev                             |
+|   \\  /    A nd           | Web:      http://www.openfoam.org               |
+|    \\/     M anipulation  |                                                 |
+\*---------------------------------------------------------------------------*/
+
+FoamFile
+{
+    version 2.0;
+    format ascii;
+
+    root "/home/cliffoi/tmp/userApps/pythonFoam/test";
+    case "SFOAM";
+    instance "system";
+    local "";
+
+    class dictionary;
+    object fvSolution;
+}
+
+// * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * //
+
+solvers         
+{
+    U               
+    {
+        preconditioner  DILU;
+        minIter         0;
+        maxIter         1000;
+        tolerance       1e-05;
+        relTol          0;
+    }
+    p               
+    {
+        preconditioner  DIC;
+        minIter         0;
+        maxIter         1000;
+        tolerance       1e-06;
+        relTol          0;
+    }
+}
+PISO            
+{
+    nCorrectors     2;
+    nNonOrthogonalCorrectors 0;
+}
+
+
+// ************************************************************************* //

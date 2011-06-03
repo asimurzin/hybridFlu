@@ -1,0 +1,62 @@
+/*---------------------------------------------------------------------------*\
+| =========                 |                                                 |
+| \\      /  F ield         | OpenFOAM: The Open Source CFD Toolbox           |
+|  \\    /   O peration     | Version:  1.4                                   |
+|   \\  /    A nd           | Web:      http://www.openfoam.org               |
+|    \\/     M anipulation  |                                                 |
+\*---------------------------------------------------------------------------*/
+
+FoamFile
+{
+    version 2.0;
+    format ascii;
+
+    root "/tmp/alexey/cases/icoFoam";
+    case "pipe";
+    instance "constant";
+    local "polyMesh";
+
+    class polyBoundaryMesh;
+    object boundary;
+}
+
+
+// * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * //
+
+4
+(
+inlet_F
+{
+    type patch;
+    physicalType inlet;
+    nFaces 606;
+    startFace 102308;
+}
+
+outlet_F1
+{
+    type patch;
+    physicalType outlet;
+    nFaces 818;
+    startFace 102914;
+}
+
+outlet_F2
+{
+    type patch;
+    physicalType outlet;
+    nFaces 522;
+    startFace 103732;
+}
+
+pipe
+{
+    type wall;
+    nFaces 5842;
+    startFace 104254;
+}
+
+)
+
+// ************************************************************************* //
+

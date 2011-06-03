@@ -1,0 +1,52 @@
+/*--------------------------------*- C++ -*----------------------------------*\
+| =========                 |                                                 |
+| \\      /  F ield         | OpenFOAM: The Open Source CFD Toolbox           |
+|  \\    /   O peration     | Version:  1.4.1-dev                             |
+|   \\  /    A nd           | Web:      http://www.openfoam.org               |
+|    \\/     M anipulation  |                                                 |
+\*---------------------------------------------------------------------------*/
+
+FoamFile
+{
+    version 2.0;
+    format ascii;
+
+    root "/home/cliffoi/OpenFOAM/cliffoi-1.4.1-dev/applications/utilities/pythonFoam";
+    case "cavity";
+    instance "constant";
+    local "polyMesh";
+
+    class polyBoundaryMesh;
+    object boundary;
+}
+
+// * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * //
+
+3
+(
+movingWall
+{
+    type wall;
+    physicalType wall;
+    nFaces 5;
+    startFace 40;
+}
+
+fixedWalls
+{
+    type wall;
+    physicalType wall;
+    nFaces 15;
+    startFace 45;
+}
+
+frontAndBack
+{
+    type empty;
+    physicalType empty;
+    nFaces 50;
+    startFace 60;
+}
+)
+
+// ************************************************************************* //

@@ -1,0 +1,133 @@
+#--------------------------------------------------------------------------------------
+README
+#--------------------------------------------------------------------------------------
+
+Copyright (C) 2009-2010 Pebble Bed Modular Reactor (Pty) Limited (PBMR)
+
+This program is free software: you can redistribute it and/or modify
+it under the terms of the GNU General Public License as published by
+the Free Software Foundation, either version 3 of the License, or
+(at your option) any later version.
+
+This program is distributed in the hope that it will be useful,
+but WITHOUT ANY WARRANTY; without even the implied warranty of
+MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+GNU General Public License for more details.
+
+You should have received a copy of the GNU General Public License
+along with this program.  If not, see <http://www.gnu.org/licenses/>.
+
+See https://vulashaka.svn.sourceforge.net/svnroot/vulashaka/ifoam
+
+
+#--------------------------------------------------------------------------------------
+Introduction
+#--------------------------------------------------------------------------------------
+
+This sub directory represents real-world engineering scenarious that prototype
+and prove the main ideas of OpenFOAM & SALOME binding definition.
+
+
+#--------------------------------------------------------------------------------------
+"test_unv2foam_standalone.py" & "test_unv2foam_embedded.py"
+#--------------------------------------------------------------------------------------
+
+Tests "unv2foam" standalone and embedded interfaces for the cross OpenFOAM utility.
+"unv2foam" utility defines the data exchange bridge between SALOME SMESH
+module and native OpenFOAM mesh representation.
+
+
+#--------------------------------------------------------------------------------------
+"test_unv2foam_standalone.py" & "test_unv2foam_embedded.py"
+#--------------------------------------------------------------------------------------
+
+Tests "unv2foam" standalone and embedded interfaces for the cross OpenFOAM utility.
+"unv2foam" utility defines the data exchange bridge between SALOME SMESH
+module and native OpenFOAM mesh representation.
+
+
+#--------------------------------------------------------------------------------------
+"test_create_smesh.py"
+#--------------------------------------------------------------------------------------
+
+Creates a CAD model and mesh it within SALOME environment (exit for internal purposes).
+This "parametric" mesh defintion is used by other test cases.
+
+
+#--------------------------------------------------------------------------------------
+"test_icoFoam_base.py"
+#--------------------------------------------------------------------------------------
+
+Defines a "base abstract class" for implementation of the interactive
+fullgrown icoFoam case (from CAD modelling till post-processing).
+This functionality defines the basis for number of different custome cases.
+
+#--------------------------------------------------------------------------------------
+"test_icoFoam_salome2unv.py" & "test_icoFoam_smesh2foam.py"
+#--------------------------------------------------------------------------------------
+
+Implements a real-world calculation case from CAD modelling, meshing and
+preporcessing to calculation. The difference between these two cases in the
+way they use "unv2foam" library (whether "standalone" or "embedded" API)
+
+Defines its functionality by inheriting from the common "test_icoFoam_base.py"
+one.
+
+
+#--------------------------------------------------------------------------------------
+"test_icoFoam_file.py"
+#--------------------------------------------------------------------------------------
+
+Defines its functionality by inheriting from the common "test_icoFoam_base.py"
+one. Reads its mesh defintion from file and display its results in SALOME VISU
+module during corresponding calculations.
+
+
+#--------------------------------------------------------------------------------------
+"test_salome_icoFoam.py"
+#--------------------------------------------------------------------------------------
+
+Defines its functionality by inheriting from the common "test_icoFoam_base.py"
+one. Uses special SALOME FOAM module to apply the boundary conditions on the
+generated mesh.
+
+
+#--------------------------------------------------------------------------------------
+"test_foam2vtk.py"
+#--------------------------------------------------------------------------------------
+
+Demonstrates pyFoam based post-processing on the fly (uses VTK library).
+
+
+#--------------------------------------------------------------------------------------
+"test_icoFoam_embedded.py"
+#--------------------------------------------------------------------------------------
+
+Demonstrates pure pyFoam based interactive solver intialization and method
+definition.
+
+
+#--------------------------------------------------------------------------------------
+"test_icoFoam_scratch.py"
+#--------------------------------------------------------------------------------------
+
+The same as "test_icoFoam_embedded.py", but additionally "demonstarates how to
+create and run an icoFoam case from scratch; no pre-existing case files are
+required"
+
+Uses Python Pmw package to keep track on residual value through 2D plot
+representation.
+
+
+#--------------------------------------------------------------------------------------
+"test_icoFoam_piso_1.py" & "test_icoFoam_piso_2.py"
+#--------------------------------------------------------------------------------------
+
+Advance "test_icoFoam_embedded.py" implementation by realisation of the
+complete PISO algorithm.
+
+Uses Python Pmw package to keep track on residual value through 2D plot
+representation.
+
+
+#--------------------------------------------------------------------------------------

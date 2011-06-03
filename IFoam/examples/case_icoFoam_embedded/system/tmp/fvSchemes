@@ -1,0 +1,60 @@
+/*--------------------------------*- C++ -*----------------------------------*\
+| =========                 |                                                 |
+| \\      /  F ield         | OpenFOAM: The Open Source CFD Toolbox           |
+|  \\    /   O peration     | Version:  1.4.1-dev                             |
+|   \\  /    A nd           | Web:      http://www.openfoam.org               |
+|    \\/     M anipulation  |                                                 |
+\*---------------------------------------------------------------------------*/
+
+FoamFile
+{
+    version 2.0;
+    format ascii;
+
+    root "/home/cliffoi/tmp/userApps/pythonFoam/test";
+    case "SFOAM";
+    instance "system";
+    local "";
+
+    class dictionary;
+    object fvSchemes;
+}
+
+// * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * //
+
+ddtSchemes      
+{
+    default         Euler;
+}
+interpolationSchemes 
+{
+    default         linear;
+}
+gradSchemes     
+{
+    default         Gauss linear;
+    grad(p)         Gauss linear;
+}
+snGradSchemes   
+{
+    default         corrected;
+}
+laplacianSchemes 
+{
+    default         none;
+    laplacian(nu,U) Gauss linear corrected;
+    laplacian((1|A(U)),p) Gauss linear corrected;
+}
+divSchemes      
+{
+    default         none;
+    div(phi,U)      Gauss linear;
+}
+fluxRequired    
+{
+    default         no;
+    p               ;
+}
+
+
+// ************************************************************************* //

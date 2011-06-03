@@ -1,0 +1,37 @@
+#!/bin/sh
+
+#--------------------------------------------------------------------------------------
+## VulaSHAKA (Simultaneous Neutronic, Fuel Performance, Heat And Kinetics Analysis)
+## Copyright (C) 2009-2010 Pebble Bed Modular Reactor (Pty) Limited (PBMR)
+## 
+## This program is free software: you can redistribute it and/or modify
+## it under the terms of the GNU General Public License as published by
+## the Free Software Foundation, either version 3 of the License, or
+## (at your option) any later version.
+##
+## This program is distributed in the hope that it will be useful,
+## but WITHOUT ANY WARRANTY; without even the implied warranty of
+## MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+## GNU General Public License for more details.
+## 
+## You should have received a copy of the GNU General Public License
+## along with this program.  If not, see <http://www.gnu.org/licenses/>.
+## 
+## See https://vulashaka.svn.sourceforge.net/svnroot/vulashaka/ifoam
+##
+## Author : Alexey PETROV
+##
+
+
+#--------------------------------------------------------------------------------------
+${CONFFOAM_ROOT_DIR}/build_configure \
+    -I ${KERNEL_ROOT_DIR}/salome_adm/unix/config_files \
+    -I ${GEOM_ROOT_DIR}/adm_local/unix/config_files \
+    -I ${MED_ROOT_DIR}/adm_local/unix/config_files \
+    -I ${SMESH_ROOT_DIR}/adm_local/unix/config_files \
+    -I ${GUI_ROOT_DIR}/adm_local/unix/config_files \
+    -I ${VISU_ROOT_DIR}/adm_local/unix/config_files #\
+#    -I ${FOAM_ROOT_DIR}/adm_local/unix/config_files
+
+
+#--------------------------------------------------------------------------------------
