@@ -76,21 +76,22 @@ def get_SALOME_CORBA_port( the_user, the_hostname ) :
   
   import tempfile 
   a_dir = os.path.join( tempfile.gettempdir(), "logs", the_user )
-  a_files = os.listdir( a_dir )
-  for a_file in a_files :
-    a_match = a_regexp.match( a_file )
-    if a_match :
-      # To chose the most recent instance of the SALOME
-      a_full_filename = os.path.join( a_dir, a_file )
-      a_creation_time = os.stat( a_full_filename )[-1]
-      if a_creation_time > a_latest_time :
-        a_SALOME_CORBA_port = int( a_match.group( 1 ) )
-        a_latest_time = a_creation_time
-        pass
+  if os.path.exists( a_dir ) :
+      a_files = os.listdir( a_dir )
+      for a_file in a_files :
+          a_match = a_regexp.match( a_file )
+          if a_match :
+              # To chose the most recent instance of the SALOME
+              a_full_filename = os.path.join( a_dir, a_file )
+              a_creation_time = os.stat( a_full_filename )[-1]
+              if a_creation_time > a_latest_time :
+                  a_SALOME_CORBA_port = int( a_match.group( 1 ) )
+                  a_latest_time = a_creation_time
+                  pass
+              pass
+          pass
       pass
-    pass
   
-
   return a_SALOME_CORBA_port
 
 
