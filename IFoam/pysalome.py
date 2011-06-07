@@ -185,7 +185,8 @@ a_salome_argv.append( '--killall' )
 a_salome_argv.append( '--splash=0' )
 a_salome_argv.append( '--modules=GUI,GEOM,MED,SMESH,FOAM,VISU' )
 
-TClient( os.getenv( "USER" ), os.getenv( "HOSTNAME" ), a_salome_argv ) # Start the main function
+import socket
+TClient( os.getenv( "USER" ), socket.gethostname(), a_salome_argv ) # Start the main function
 
 from killSalome import killAllPorts as kill_salome
 
