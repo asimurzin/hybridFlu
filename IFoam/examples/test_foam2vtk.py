@@ -68,8 +68,8 @@ def main_standalone( argc, argv ):
 if __name__ == "__main__" :
     import os
     argv = None
-    from Foam import WM_PROJECT_VERSION
-    if WM_PROJECT_VERSION() <= "1.4.1-dev" :
+    from Foam import FOAM_VERSION
+    if FOAM_VERSION( "<=", "010400" ):
         a_dir = os.path.join( os.environ[ "IFOAM_ROOT_DIR" ], 'IFoam', 'examples' )
         argv = [ __file__, a_dir, 'case_foam2vtk' ]
     else:
