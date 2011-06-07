@@ -24,7 +24,7 @@
 from Foam.OpenFOAM import *
 from Foam.finiteVolume import *
 
-from Foam.applications.solvers.incompressible.emb_icoFoam import solver as icoFoam
+from icoFlux.emb_icoFlux import solver as icoFoam
 
 from IFoam.foam2visu import TDummyPostProcessor
 from IFoam.foam2visu import print_d
@@ -93,7 +93,7 @@ class TIcoFoamSolverBase :
                                                            IOobject.NO_READ,
                                                            IOobject.NO_WRITE ) )
 
-        nu = dimensionedScalar( word( "nu" ), dimensionSet( 0, 2, -1, 0, 0, 0, 0 ), 1e-6 )
+        nu = dimensionedScalar( word( "nu" ), dimensionSet( 0.0, 2.0, -1.0, 0.0, 0.0, 0.0, 0.0 ), 1e-6 )
         self.transportProperties.add( word( "nu" ), nu );
     
     
@@ -118,7 +118,7 @@ class TIcoFoamSolverBase :
         pPatchTypes = pyWordList( [ 'zeroGradient', 'fixedValue', 'fixedValue', 'zeroGradient' ] )
 
         a_value = dimensionedScalar( word(), 
-                                     dimensionSet( 0, 2, -2, 0, 0, 0, 0 ), 
+                                     dimensionSet( 0.0, 2.0, -2.0, 0.0, 0.0, 0.0, 0.0 ), 
                                      101.325 )
 
         self.p = volScalarField( IOobject( word( "p" ),
@@ -138,8 +138,8 @@ class TIcoFoamSolverBase :
         UPatchTypes = pyWordList( [ 'fixedValue', 'zeroGradient', 'zeroGradient', 'fixedValue' ] )
 
         a_value = dimensionedVector( word(), 
-                                     dimensionSet( 0, 1, -1, 0, 0, 0, 0 ), 
-                                     vector( 0, 0, 0 ) )
+                                     dimensionSet( 0.0, 1.0, -1.0, 0.0, 0.0, 0.0, 0.0 ), 
+                                     vector( 0.0, 0.0, 0.0 ) )
 
         self.U = volVectorField( IOobject( word( "U" ),
                                            fileName( self.run_time.timeName() ),
@@ -151,8 +151,8 @@ class TIcoFoamSolverBase :
                                  UPatchTypes
                                  )
 
-        self.U.ext_boundaryField()[ 0 ].ext_assign( vector( 0, 0.1, 0 ) )
-        self.U.ext_boundaryField()[ 3 ].ext_assign( vector( 0, 0.0, 0 ) )
+        self.U.ext_boundaryField()[ 0 ].ext_assign( vector( 0.0, 0.1, 0.0 ) )
+        self.U.ext_boundaryField()[ 3 ].ext_assign( vector( 0.0, 0.0, 0.0 ) )
 
         from Foam.finiteVolume.cfdTools.incompressible import createPhi
         self.phi = createPhi( self.run_time, self.mesh, self.U )
