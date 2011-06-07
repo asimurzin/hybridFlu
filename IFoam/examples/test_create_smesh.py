@@ -45,7 +45,7 @@ def createMesh():
 	Cylinder_2 = geompy.MakeCylinder(Vertex_2, Vector_z, R1, H)
 	Fuse_1 = geompy.MakeFuse(Cylinder_1, Cylinder_2)
 	[Face_1,Face_2,Face_3,Face_4,Face_5] = geompy.SubShapeAllSorted(Fuse_1, geompy.ShapeType["FACE"])
-	[Edge_1,Edge_2,Edge_3,Edge_4,Edge_5,Edge_6,Edge_7,Edge_8,Edge_9,Edge_10] = geompy.SubShapeAllSorted(Fuse_1, geompy.ShapeType["EDGE"])
+	#[Edge_1,Edge_2,Edge_3,Edge_4,Edge_5,Edge_6,Edge_7,Edge_8,Edge_9,Edge_10] = geompy.SubShapeAllSorted(Fuse_1, geompy.ShapeType["EDGE"])
 	geompy.addToStudy( Vertex_1, "Vertex_1" )
 	geompy.addToStudy( Vertex_2, "Vertex_2" )
 	geompy.addToStudy( Vector_y, "Vector_y" )
