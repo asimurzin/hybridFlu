@@ -30,10 +30,10 @@ from Foam.finiteVolume import *
 #--------------------------------------------------------------------------------------
 if __name__ == "__main__" :
     import os
-    from Foam import WM_PROJECT_VERSION
+    from Foam import FOAM_VERSION
     
     argv = None
-    if WM_PROJECT_VERSION() < "1.5" :
+    if FOAM_VERSION( "<", "010500" ) :
         a_dir = os.path.join( os.environ[ "IFOAM_ROOT_DIR" ], 'IFoam', 'examples' )
         argv = [ __file__, a_dir, 'case_unv2foam' ]
     else:
@@ -51,7 +51,7 @@ if __name__ == "__main__" :
     a_root_dir, a_case = os.path.split( a_path )
     an_unv_file_name = os.path.join( a_path, "mesh" + os.path.extsep + "unv" )
     
-    if WM_PROJECT_VERSION() < "1.5" :
+    if FOAM_VERSION( "<", "010500" ) :
         os.system( "unv2foam %s %s %s" %( a_root_dir, a_case, an_unv_file_name ))
         pass
     else :
