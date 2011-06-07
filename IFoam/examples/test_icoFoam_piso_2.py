@@ -54,7 +54,7 @@ class pyIcoFoam:
         runTime_ = self.runTime
         mesh_ = U_.mesh()
         
-        runTime_.step()
+        runTime_.increment()
         
         # Read transport properties
         nu = dimensionedScalar(self.transportProperties.lookup(word("nu")))
