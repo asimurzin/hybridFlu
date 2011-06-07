@@ -24,7 +24,7 @@
 
 
 #--------------------------------------------------------------------------------------
-${CONFFOAM_ROOT_DIR}/build_configure \
+${CONFFLU_ROOT_DIR}/build_configure \
     -I ${KERNEL_ROOT_DIR}/salome_adm/unix/config_files \
     -I ${GEOM_ROOT_DIR}/adm_local/unix/config_files \
     -I ${MED_ROOT_DIR}/adm_local/unix/config_files \
