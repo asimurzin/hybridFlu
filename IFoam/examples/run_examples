@@ -48,7 +48,7 @@ cd ${0%/*} || exit 1    # run from this directory
 
 ./test_icoFoam_piso_2.py || exit 1
 
-./test_salome_icoFoam.py  || exit 1
+#./test_salome_icoFoam.py  || exit 1
 
 
 #------------------------------------------------------------------------------
