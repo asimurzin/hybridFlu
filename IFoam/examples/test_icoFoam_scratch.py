@@ -155,7 +155,7 @@ def createFvMesh(runTime):
                 )
     
     # Create boundary patches
-    patches = pPolyPatchList(4, polyPatch.nullPtr())
+    patches = polyPatchListPtr( 4, polyPatch.nullPtr() )
     patches.set(0, polyPatch.New(
                     word("patch"),
                     word("inlet_F"),
@@ -218,7 +218,7 @@ transportProperties = IOdictionary(IOobject(word("transportProperties"),
                                             IOobject.NO_READ,
                                             IOobject.NO_WRITE))
 
-nu = dimensionedScalar(word("nu"), dimensionSet(0, 2, -1, 0, 0, 0, 0), 1e-6)
+nu = dimensionedScalar(word("nu"), dimensionSet( 0.0, 2.0, -1.0, 0.0, 0.0, 0.0, 0.0), 1e-6)
 transportProperties.add(word("nu"), nu);
 
 
@@ -248,7 +248,7 @@ p = volScalarField(IOobject(word("p"),
                             IOobject.NO_READ,
                             IOobject.AUTO_WRITE),
                        mesh,
-                       dimensionedScalar(word(), dimensionSet(0, 2, -2, 0, 0, 0, 0), 101.325),
+                       dimensionedScalar(word(), dimensionSet( 0.0, 2.0, -2.0, 0.0, 0.0, 0.0, 0.0 ), 101.325),
                        pPatchTypes
                    )
 
@@ -264,12 +264,12 @@ U = volVectorField(IOobject(word("U"),
                             IOobject.NO_READ,
                             IOobject.AUTO_WRITE),
                        mesh,
-                       dimensionedVector(word(), dimensionSet(0, 1, -1, 0, 0, 0, 0), vector(0,0,0)),
+                       dimensionedVector(word(), dimensionSet( 0.0, 1.0, -1.0, 0.0, 0.0, 0.0, 0.0 ), vector( 0.0, 0.0, 0.0 ) ),
                        UPatchTypes
                    )
 
-U.ext_boundaryField()[0].ext_assign( vector(0, 0.1, 0) )
-U.ext_boundaryField()[3].ext_assign( vector(0, 0.0, 0) )
+U.ext_boundaryField()[0].ext_assign( vector( 0.0, 0.1, 0.0 ) )
+U.ext_boundaryField()[3].ext_assign( vector( 0.0, 0.0, 0.0 ) )
 
 from Foam.finiteVolume.cfdTools.incompressible import createPhi
 phi = createPhi( runTime, mesh, U )
@@ -278,7 +278,7 @@ phi = createPhi( runTime, mesh, U )
 runTime.writeNow()
 
 # Create solver
-from Foam.applications.solvers.incompressible.emb_icoFoam import solver as icoFoam
+from icoFlux.emb_icoFlux import solver as icoFoam
 icoSolver = icoFoam(runTime, U, p, phi, transportProperties)
 
 
