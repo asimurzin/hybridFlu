@@ -52,7 +52,7 @@ class TIcoFoamSolver( TIcoFoamSolverBase ) :
         aStudyId = salome.myStudy._get_StudyId()
 
         # Generation of the mesh
-        from examples import test_create_smesh
+        from IFoam.examples import test_create_smesh
         [aMesh, GroupList] = test_create_smesh.createMesh()
 
         # load foam engine
