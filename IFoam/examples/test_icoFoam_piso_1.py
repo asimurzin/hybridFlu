@@ -82,15 +82,15 @@ cd = runTime.controlDict()
 cd.remove(word("startTime"))
 cd.add(word("startTime"), 0)
 cd.remove(word("endTime"))
-cd.add(word("endTime"), 0.5)
+cd.add(word("endTime"), 0.5 )
 cd.remove(word("deltaT"))
-cd.add(word("deltaT"), 0.005)
+cd.add(word("deltaT"), 0.005 )
 
 runTime.read()
 
 print runTime.timeName()
 
-from Foam.applications.solvers.incompressible.emb_icoFoam import solver as icoFoam
+from icoFlux.emb_icoFlux import solver as icoFoam
 solver = icoFoam(runTime, U, p, phi, transportProperties)
 
 pRes = [] #initial pressure residual
