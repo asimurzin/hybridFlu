@@ -90,7 +90,7 @@ runTime.read()
 
 print runTime.timeName()
 
-from icoFlux.emb_icoFlux import solver as icoFoam
+from icoFlux.embedded import solver as icoFoam
 solver = icoFoam(runTime, U, p, phi, transportProperties)
 
 pRes = [] #initial pressure residual

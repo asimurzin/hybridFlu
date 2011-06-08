@@ -24,7 +24,7 @@
 from Foam.OpenFOAM import *
 from Foam.finiteVolume import *
 
-from icoFlux.emb_icoFlux import solver as icoFoam
+from icoFlux.embedded import solver as icoFoam
 
 from hybridFlu.foam2visu import TDummyPostProcessor
 from hybridFlu.foam2visu import print_d

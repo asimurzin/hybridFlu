@@ -278,7 +278,7 @@ phi = createPhi( runTime, mesh, U )
 runTime.writeNow()
 
 # Create solver
-from icoFlux.emb_icoFlux import solver as icoFoam
+from icoFlux.embedded import solver as icoFoam
 icoSolver = icoFoam(runTime, U, p, phi, transportProperties)
 
 
