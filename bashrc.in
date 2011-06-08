@@ -21,15 +21,15 @@
 
 
 #--------------------------------------------------------------------------------------
-if test "${IFOAM_ROOT_DIR}x" = "x" ; then
-   export IFOAM_ROOT_DIR="@abs_top_builddir@"
-   echo IFOAM_ROOT_DIR=\"${IFOAM_ROOT_DIR}\"
+if test "${HYBRIDFLU_ROOT_DIR}x" = "x" ; then
+   export HYBRIDFLU_ROOT_DIR="@abs_top_builddir@"
+   echo HYBRIDFLU_ROOT_DIR=\"${HYBRIDFLU_ROOT_DIR}\"
 
-   source ${IFOAM_ROOT_DIR}/env.sh
+   source ${HYBRIDFLU_ROOT_DIR}/env.sh
 
-   export PATH=${IFOAM_ROOT_DIR}:${PATH}
-   export PYTHONPATH=${IFOAM_ROOT_DIR}:${IFOAM_ROOT_DIR}:${PYTHONPATH}
-   export LD_LIBRARY_PATH=${IFOAM_ROOT_DIR}:${LD_LIBRARY_PATH}
+   export PATH=${HYBRIDFLU_ROOT_DIR}:${PATH}
+   export PYTHONPATH=${HYBRIDFLU_ROOT_DIR}:${HYBRIDFLU_ROOT_DIR}:${PYTHONPATH}
+   export LD_LIBRARY_PATH=${HYBRIDFLU_ROOT_DIR}:${LD_LIBRARY_PATH}
 fi
 
 

@@ -34,10 +34,10 @@ if __name__ == "__main__" :
     
     argv = None
     if FOAM_VERSION( "<", "010500" ) :
-        a_dir = os.path.join( os.environ[ "IFOAM_ROOT_DIR" ], 'hybridFlu', 'examples' )
+        a_dir = os.path.join( os.environ[ "HYBRIDFLU_ROOT_DIR" ], 'hybridFlu', 'examples' )
         argv = [ __file__, a_dir, 'case_unv2foam' ]
     else:
-        a_dir = os.path.join( os.environ[ "IFOAM_ROOT_DIR" ], 'hybridFlu', 'examples', 'case_unv2foam' )
+        a_dir = os.path.join( os.environ[ "HYBRIDFLU_ROOT_DIR" ], 'hybridFlu', 'examples', 'case_unv2foam' )
         argv = [ __file__, '-case', a_dir ]
         pass
     

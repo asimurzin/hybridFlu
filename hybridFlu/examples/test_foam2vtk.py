@@ -70,10 +70,10 @@ if __name__ == "__main__" :
     argv = None
     from Foam import FOAM_VERSION
     if FOAM_VERSION( "<=", "010400" ):
-        a_dir = os.path.join( os.environ[ "IFOAM_ROOT_DIR" ], 'hybridFlu', 'examples' )
+        a_dir = os.path.join( os.environ[ "HYBRIDFLU_ROOT_DIR" ], 'hybridFlu', 'examples' )
         argv = [ __file__, a_dir, 'case_foam2vtk' ]
     else:
-        a_dir = os.path.join( os.environ[ "IFOAM_ROOT_DIR" ], 'hybridFlu', 'examples', 'case_foam2vtk' )
+        a_dir = os.path.join( os.environ[ "HYBRIDFLU_ROOT_DIR" ], 'hybridFlu', 'examples', 'case_foam2vtk' )
         argv = [ __file__, '-case', a_dir ]
         pass
     

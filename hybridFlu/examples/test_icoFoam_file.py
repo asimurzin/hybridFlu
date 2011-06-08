@@ -61,7 +61,7 @@ class TIcoFoamSolver( TIcoFoamSolverBase ) :
 if __name__ == "__main__" :    
     # To define the solver parameters
     import os, os.path
-    a_case_dir = os.path.join( os.environ[ "IFOAM_ROOT_DIR" ], 'hybridFlu', 'examples', "case_icoFoam" )
+    a_case_dir = os.path.join( os.environ[ "HYBRIDFLU_ROOT_DIR" ], 'hybridFlu', 'examples', "case_icoFoam" )
 
     # To instantiate the solver
     from hybridFlu.foam2visu import TSalomePostProcessor as TPostProcessor
