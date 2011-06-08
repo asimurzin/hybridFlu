@@ -24,7 +24,7 @@
 
 
 #--------------------------------------------------------------------------------------
-from IFoam.examples.test_icoFoam_base import *
+from hybridFlu.examples.test_icoFoam_base import *
 
 
 #--------------------------------------------------------------------------------------
@@ -46,16 +46,16 @@ class TIcoFoamSolver( TIcoFoamSolverBase ) :
         Creates fvMesh
         """
         # Connect to SALOME
-        import IFoam.pysalome
+        import hybridFlu.pysalome
 
         import salome
         aStudyId = salome.myStudy._get_StudyId()
 
         # Generation of the mesh
-        from IFoam.examples import test_create_smesh
+        from hybridFlu.examples import test_create_smesh
         [ aMesh, GroupList ] = test_create_smesh.createMesh()
 
-        from IFoam import smesh2foam
+        from hybridFlu import smesh2foam
         self.ext_autoPtr_fvMesh = smesh2foam.execute( aMesh, self.run_time )
         
         return self.ext_autoPtr_fvMesh(), None
@@ -70,7 +70,7 @@ if __name__ == "__main__" :
     a_case_dir = tempfile.mkdtemp()
 
     # To instantiate the solver
-    from IFoam.foam2visu import TSalomePostProcessor as TPostProcessor
+    from hybridFlu.foam2visu import TSalomePostProcessor as TPostProcessor
     a_solver = TIcoFoamSolver( a_case_dir, TPostProcessor )
 
     # To start the solver execution

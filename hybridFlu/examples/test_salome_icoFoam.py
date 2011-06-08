@@ -24,7 +24,7 @@
 
 
 #--------------------------------------------------------------------------------------
-from IFoam.examples.test_icoFoam_base import *
+from hybridFlu.examples.test_icoFoam_base import *
 
 
 #--------------------------------------------------------------------------------------
@@ -46,13 +46,13 @@ class TIcoFoamSolver( TIcoFoamSolverBase ) :
         Creates fvMesh
         """
         # Connect to SALOME
-        import IFoam.pysalome
+        import hybridFlu.pysalome
 
         import salome
         aStudyId = salome.myStudy._get_StudyId()
 
         # Generation of the mesh
-        from IFoam.examples import test_create_smesh
+        from hybridFlu.examples import test_create_smesh
         [aMesh, GroupList] = test_create_smesh.createMesh()
 
         # load foam engine

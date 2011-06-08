@@ -54,7 +54,7 @@ def main_standalone( argc, argv ):
                                   IOobject.NO_WRITE ),
                         mesh )
 
-    from IFoam import foam2vtk
+    from hybridFlu import foam2vtk
     pPlot = foam2vtk.field_plotter( p )
 
     tmp = U.mag()
@@ -70,10 +70,10 @@ if __name__ == "__main__" :
     argv = None
     from Foam import FOAM_VERSION
     if FOAM_VERSION( "<=", "010400" ):
-        a_dir = os.path.join( os.environ[ "IFOAM_ROOT_DIR" ], 'IFoam', 'examples' )
+        a_dir = os.path.join( os.environ[ "IFOAM_ROOT_DIR" ], 'hybridFlu', 'examples' )
         argv = [ __file__, a_dir, 'case_foam2vtk' ]
     else:
-        a_dir = os.path.join( os.environ[ "IFOAM_ROOT_DIR" ], 'IFoam', 'examples', 'case_foam2vtk' )
+        a_dir = os.path.join( os.environ[ "IFOAM_ROOT_DIR" ], 'hybridFlu', 'examples', 'case_foam2vtk' )
         argv = [ __file__, '-case', a_dir ]
         pass
     

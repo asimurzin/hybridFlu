@@ -28,7 +28,7 @@ import geompy
 import math
 import smesh
 
-from IFoam.foam_smesh_tools import group_create
+from hybridFlu.foam_smesh_tools import group_create
 
 
 def createMesh():

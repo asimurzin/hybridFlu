@@ -194,7 +194,7 @@ def createFvMesh(runTime):
 
 # Create root and case
 import os
-root = fileName( os.path.join( os.environ[ "IFOAM_ROOT_DIR" ], 'IFoam', 'examples' ) )
+root = fileName( os.path.join( os.environ[ "IFOAM_ROOT_DIR" ], 'hybridFlu', 'examples' ) )
 case = fileName( "case_icoFoam_embedded" )
 
 
