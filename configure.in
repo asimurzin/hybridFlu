@@ -36,7 +36,7 @@ CONFFOAM_CHECK_OPENFOAM
 echo 
 
 echo "--------------------------------------------------------------------------------------"
-CONFFOAM_CHECK_PYFOAM
+CONFFLU_CHECK_PYTHONFLU
 echo 
 
 echo "--------------------------------------------------------------------------------------"
@@ -80,13 +80,13 @@ echo "--------------------------------------------------------------------------
 echo 
 
 echo "---------------------------- mandatory products --------------------------------"
-CONFFOAM_PRINT_SUMMURY( "openfoam_ok pyfoam_ok ipython_ok" )
+CONFFOAM_PRINT_SUMMURY( "openfoam_ok pythonflu_ok ipython_ok" )
 echo
 echo "---------------------------- optional products ---------------------------------"
 CONFFOAM_PRINT_SUMMURY( "foam2vtk_ok unv2foam_ok foam2med_ok python_pmw_ok python_tkinter_ok salome_geom_ok salome_smesh_ok salome_visu_ok salome_foam_ok" )
 echo
 echo "--------------------------------------------------------------------------------"
-CONFFOAM_CHECK_MANDATORY( "openfoam_ok pyfoam_ok ipython_ok" )
+CONFFOAM_CHECK_MANDATORY( "openfoam_ok pythonflu_ok ipython_ok" )
 
 
 #--------------------------------------------------------------------------------------
