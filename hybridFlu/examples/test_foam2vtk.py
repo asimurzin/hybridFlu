@@ -54,11 +54,11 @@ def main_standalone( argc, argv ):
                                   IOobject.NO_WRITE ),
                         mesh )
 
-    from hybridFlu import foam2vtk
-    pPlot = foam2vtk.field_plotter( p )
+    from hybridFlu.vtkPlotter import field_plotter
+    pPlot = field_plotter( p )
 
     tmp = U.mag()
-    UPlot = foam2vtk.field_plotter( tmp() )
+    UPlot = field_plotter( tmp() )
 
     import os
     return os.EX_OK

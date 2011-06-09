@@ -21,8 +21,7 @@
 
 
 #--------------------------------------------------------------------------------------
-from Foam.finiteVolume import *
-from Foam.applications.utilities.postProcessing.graphics.foam2vtk import *
+from foam2vtk import *
 
 import vtk
 from math import sqrt
