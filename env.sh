@@ -21,31 +21,27 @@
 
 
 #--------------------------------------------------------------------------------------
-# Source the conffoam environment
-source /opt/conffoam/r0.1/bashrc
+# Source the confFlu environment
+source /usr/local/share/confFlu/bashrc
 
 #--------------------------------------------------------------------------------------
 # Source OpenFOAM environment
 which_open_foam="1.6"
-source_openfoam /opt/OpenFOAM/r${which_open_foam}/debug/bashrc
+#source_openfoam /home/andrey/OpenFOAM/OpenFOAM-1.6/etc/bashrc
 
-# Source SALOME environment
-source_salome /opt/SALOME/r5.1.3/r1.0/from_sources/env_products.sh
+source_openfoam /opt/openfoam171/etc/bashrc
+
+source_salome /home/andrey/salome_5.1.4/env_products.sh
 
 # Source VulaShaka utility components : foam2vtk, unv2foam, pyfoam and foam2med
-source /opt/foam2vtk/r0.3/OpenFOAM-${which_open_foam}/bashrc 
+#source /home/andrey/hybridflu/foam2vtk/bashrc 
 
-source /opt/unv2foam/r0.3/OpenFOAM-${which_open_foam}/bashrc 
+source /home/andrey/hybridflu/unv2foam/bashrc 
 
-source /opt/pyfoam/r7.4/OpenFOAM-${which_open_foam}/bashrc 
+source /home/andrey/hybridflu/foam2med/bashrc
 
-source /opt/foam2med/r2.2/bashrc 
-
-
-#--------------------------------------------------------------------------------------
-source /opt/Pmw/r1.3.2/bashrc 
-
-source /opt/ipython/r0.10/bashrc 
+source /home/andrey/hybridflu/pyflu/bashrc  
 
 
 #--------------------------------------------------------------------------------------
+
