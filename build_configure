@@ -39,7 +39,19 @@ if test "${confflu_path}x" = "x"; then
    exit 0
 fi
 
+#--------------------------------------------------------------------------------------
+foam2vtk_include=""
+
+if test "x${FOAM2VTK_ROOT_DIR}" != "x"; then
+   foam2vtk_include="-I ${FOAM2VTK_ROOT_DIR}/admin"
+fi
+
+if test "x${foam2vtk_include}" = x && test -d /usr/local/share/foam2vtk/admin; then
+   foam2vtk_include="-I /usr/local/share/foam2vtk/admin"
+fi
+ 
 ${confflu_path}/build_configure \
+     ${foam2vtk_include} \
     -I ${KERNEL_ROOT_DIR}/salome_adm/unix/config_files \
     -I ${GEOM_ROOT_DIR}/adm_local/unix/config_files \
     -I ${MED_ROOT_DIR}/adm_local/unix/config_files \
