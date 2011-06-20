@@ -33,8 +33,6 @@ source_openfoam /opt/openfoam171/etc/bashrc
 source_salome /home/andrey/salome_5.1.4/env_products.sh
 
 # Source VulaShaka utility components : foam2vtk, unv2foam, pyfoam and foam2med
-source /home/andrey/hybridflu/unv2foam/bashrc 
-
 source /home/andrey/hybridflu/foam2med/bashrc
 
 
