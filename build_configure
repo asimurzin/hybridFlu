@@ -68,11 +68,34 @@ if test "x${foam2vtk_include}" = x && test -d /usr/local/share/foam2vtk/admin; t
    foam2vtk_include="-I /usr/local/share/foam2vtk/admin"
 fi
 
+if test "${foam2vtk_include}x" = "x"; then
+   echo "ERROR:foam2vtk need to be installed or sourced"
+   exit 0
+fi
+
+
+#--------------------------------------------------------------------------------------
+unv2foam_include=""
+
+if test "x${UNV2FOAM_ROOT_DIR}" != "x"; then
+   unv2foam_include="-I ${UNV2FOAM_ROOT_DIR}/admin"
+fi
+
+if test "x${unv2foam_include}" = x && test -d /usr/local/share/unv2foam/admin; then
+   unv2foam_include="-I /usr/local/share/unv2foam/admin"
+fi
+
+if test "${unv2foam_include}x" = "x"; then
+   echo "ERROR:unv2foam need to be installed or sourced"
+   exit 0
+fi
+
 
 #--------------------------------------------------------------------------------------
 ${confflu_path}/build_configure \
      ${pythonflu_include} \
      ${foam2vtk_include} \
+     ${unv2foam_include} \
     -I ${KERNEL_ROOT_DIR}/salome_adm/unix/config_files \
     -I ${GEOM_ROOT_DIR}/adm_local/unix/config_files \
     -I ${MED_ROOT_DIR}/adm_local/unix/config_files \
