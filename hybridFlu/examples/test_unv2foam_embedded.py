@@ -52,7 +52,7 @@ if __name__ == "__main__" :
     an_unv_file_name = os.path.join( a_path, "mesh" + os.path.extsep + "unv" )
 
     from Foam.OpenFOAM import fileName
-    from Foam.applications.utilities.mesh.conversion.unv2foam import unv2foam
+    from unv2foam import unv2foam
     a_fvMesh = unv2foam( fileName( an_unv_file_name ), runTime )
 
     print "OK"
