@@ -39,6 +39,24 @@ if test "${confflu_path}x" = "x"; then
    exit 0
 fi
 
+
+#--------------------------------------------------------------------------------------
+pythonflu_include=""
+
+if test "x${PYTHONFLU_ROOT_DIR}" != "x"; then
+   pythonflu_include="-I ${PYTHONFLU_ROOT_DIR}/admin"
+fi
+
+if test "x${pythonflu_include}" = "x" && test -d /usr/local/share/pythonFlu/admin; then
+   pythonflu_include="-I /usr/local/share/pythonFlu/admin"
+fi
+
+if test "${pythonflu_include}x" = "x"; then
+   echo "ERROR:pythonFlu need to be installed or sourced"
+   exit 0
+fi
+
+
 #--------------------------------------------------------------------------------------
 foam2vtk_include=""
 
@@ -49,8 +67,11 @@ fi
 if test "x${foam2vtk_include}" = x && test -d /usr/local/share/foam2vtk/admin; then
    foam2vtk_include="-I /usr/local/share/foam2vtk/admin"
 fi
- 
+
+
+#--------------------------------------------------------------------------------------
 ${confflu_path}/build_configure \
+     ${pythonflu_include} \
      ${foam2vtk_include} \
     -I ${KERNEL_ROOT_DIR}/salome_adm/unix/config_files \
     -I ${GEOM_ROOT_DIR}/adm_local/unix/config_files \
