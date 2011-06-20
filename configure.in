@@ -32,11 +32,11 @@ AC_CONFIG_MACRO_DIR([admin])
 AM_INIT_AUTOMAKE([tar-pax -Wno-portability])
 
 echo "--------------------------------------------------------------------------------------"
-CONFFOAM_CHECK_OPENFOAM
+CONFFLU_CHECK_OPENFOAM
 echo 
 
 echo "--------------------------------------------------------------------------------------"
-CONFFLU_CHECK_PYTHONFLU
+PYTHONFLU_CHECK_PYTHONFLU
 echo 
 
 echo "--------------------------------------------------------------------------------------"
@@ -44,49 +44,49 @@ FOAM2VTK_CHECK_FOAM2VTK
 echo 
 
 echo "--------------------------------------------------------------------------------------"
-CONFFOAM_CHECK_UNV2FOAM
+UNV2FOAM_CHECK_UNV2FOAM
 echo 
 
 echo "--------------------------------------------------------------------------------------"
-CONFFOAM_CHECK_FOAM2MED
+CONFFLU_CHECK_FOAM2MED
 echo 
 
 echo "--------------------------------------------------------------------------------------"
-CONFFOAM_CHECK_IPYTHON
+CONFFLU_CHECK_IPYTHON
 echo 
 
 echo "--------------------------------------------------------------------------------------"
-CONFFOAM_CHECK_PYTHON_PMW
+CONFFLU_CHECK_PYTHON_PMW
 echo 
 
 echo "--------------------------------------------------------------------------------------"
-CONFFOAM_CHECK_PYTHON_TKINTER
+CONFFLU_CHECK_PYTHON_TKINTER
 echo 
 
 echo "--------------------------------------------------------------------------------------"
-CONFFOAM_CHECK_SALOME_GEOM
+CONFFLU_CHECK_SALOME_GEOM
 echo 
 
 echo "--------------------------------------------------------------------------------------"
-CONFFOAM_CHECK_SALOME_SMESH
+CONFFLU_CHECK_SALOME_SMESH
 echo 
 
 echo "--------------------------------------------------------------------------------------"
-CONFFOAM_CHECK_SALOME_VISU
+CONFFLU_CHECK_SALOME_VISU
 echo 
 
 echo "--------------------------------------------------------------------------------------"
-#CONFFOAM_CHECK_SALOME_FOAM
+#CONFFLU_CHECK_SALOME_FOAM
 echo 
 
 echo "---------------------------- mandatory products --------------------------------"
-CONFFOAM_PRINT_SUMMURY( "openfoam_ok pythonflu_ok ipython_ok" )
+CONFFLU_PRINT_SUMMURY( "openfoam_ok pythonflu_ok ipython_ok" )
 echo
 echo "---------------------------- optional products ---------------------------------"
-CONFFOAM_PRINT_SUMMURY( "foam2vtk_ok unv2foam_ok foam2med_ok python_pmw_ok python_tkinter_ok salome_geom_ok salome_smesh_ok salome_visu_ok salome_foam_ok" )
+CONFFLU_PRINT_SUMMURY( "foam2vtk_ok unv2foam_ok foam2med_ok python_pmw_ok python_tkinter_ok salome_geom_ok salome_smesh_ok salome_visu_ok salome_foam_ok" )
 echo
 echo "--------------------------------------------------------------------------------"
-CONFFOAM_CHECK_MANDATORY( "openfoam_ok pythonflu_ok ipython_ok" )
+CONFFLU_CHECK_MANDATORY( "openfoam_ok pythonflu_ok ipython_ok" )
 
 
 #--------------------------------------------------------------------------------------
