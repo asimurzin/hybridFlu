@@ -41,10 +41,10 @@ def execute( the_smesh_mesh, the_foam_time ):
 
     the_smesh_mesh.ExportUNV( a_tmp_file_name )
 
-    from unv2foam import unv2foam
+    import unv2foam
     from Foam.OpenFOAM import fileName
     
-    return unv2foam( fileName( a_tmp_file_name), the_foam_time )
+    return unv2foam.engine( fileName( a_tmp_file_name), the_foam_time )
 
 
 
