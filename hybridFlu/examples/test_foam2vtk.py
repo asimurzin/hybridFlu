@@ -68,6 +68,14 @@ def main_standalone( argc, argv ):
 if __name__ == "__main__" :
     import os
     argv = None
+    
+    from salome_version import getVersion as SalomeVersion
+    if SalomeVersion() > '5.1.4':
+       import os
+       print "Not supported Salome version. Use Salome 5.1.4 or 5.1.3"
+       os._exit( os.EX_OK )
+       pass
+    
     from Foam import FOAM_VERSION
     if FOAM_VERSION( "<=", "010400" ):
         a_dir = os.path.join( os.environ[ "HYBRIDFLU_ROOT_DIR" ], 'hybridFlu', 'examples' )

@@ -28,6 +28,13 @@
 Example icoFoam PISO algorithm
 """
 
+from salome_version import getVersion as SalomeVersion
+if SalomeVersion() > '5.1.4':
+    import os
+    print "Not supported Salome version. Use Salome 5.1.4 or 5.1.3"
+    os._exit( os.EX_OK )
+    pass
+
 from Foam.OpenFOAM import *
 from Foam.finiteVolume import *
 from Foam import fvm, fvc
