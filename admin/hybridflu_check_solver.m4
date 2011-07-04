@@ -1,4 +1,3 @@
-dnl pythonFlu - Python wrapping for OpenFOAM C++ API
 dnl Copyright (C) 2010- Alexey Petrov
 dnl Copyright (C) 2009-2010 Pebble Bed Modular Reactor (Pty) Limited (PBMR)
 dnl 
@@ -29,7 +28,7 @@ solver_name=$1
 
 AC_CHECKING(for ${solver_name} package)
 
-solver_ok=no
+eval ${solver_name}_ok=no
 
 dnl --------------------------------------------------------------------------------
 AC_CHECK_PROG( [solver_exe], [${solver_name}], [yes], [no] )
