@@ -30,4 +30,10 @@
 
     * Adjusting to the "common configuration system" (confFoam package)
 
+2011-07-04 Alexey PETROV <alexey.petrov.nnov@gmail.com>
+
+    * Adjusting to the "changed configuration system" (confFlu package), foam2vtk, unv2foam, foam2med packages
+    
+    * Bug fixing
+
 	

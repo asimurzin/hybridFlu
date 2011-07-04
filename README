@@ -23,7 +23,7 @@ See http://sourceforge.net/projects/pythonflu
 Introduction
 #--------------------------------------------------------------------------------------
 
-IFoam is an OpenFOAM based calculation framework. It uses pyFoam, as the basic
+hybridFlu is an OpenFOAM based calculation framework. It uses pythonFlu, as the basic
 solver engine, and Python, as gluing programming language, itegrates visual
 components for limited post-processing, provides access to some GUI components
 for more efficient set up the simulation cases.
@@ -36,22 +36,22 @@ Motivation
 Engineering standard routines and research practice needs something more then
 just set of bare solvers and pre/post-processing utilities. Engineers need a
 common software environment to couple all these things together, to automate
-their work, to express all their needs in the same terms. IFoam intends to
+their work, to express all their needs in the same terms. hybridFlu intends to
 provide all these features and even more 
 
-  - IFoam provides direct access to the solver code (you will be able to write
+  - hybridFlu provides direct access to the solver code (you will be able to write
   your own custom routines) 
 
-  - IFoam allows integrate different technologies, libraries and applications
+  - hybridFlu allows integrate different technologies, libraries and applications
   within the same working environment 
 
-  - IFoam allows you solve the engineering problem as the whole (you need not
+  - hybridFlu allows you solve the engineering problem as the whole (you need not
     go outside, to perform a particular task, all is within) 
 
-  - IFoam can be used as with GUI, as without (it is possible even to automate
+  - hybridFlu can be used as with GUI, as without (it is possible even to automate
     GUI tasks from within) 
 
-  - IFoam is a perfect tool to accumulate your engineering experience in terms
+  - hybridFlu is a perfect tool to accumulate your engineering experience in terms
     of "live use-cases"
 
 
@@ -86,25 +86,25 @@ Usage of Python programming language brings a lot of advantages, namely
 
 
 #--------------------------------------------------------------------------------------
-pyFoam and IFoam relationship 
+pythonFlu and hybridFlu relationship 
 #--------------------------------------------------------------------------------------
 
-pyFoam and IFoam stay very close together. Some times it is even difficult to
-say, where pyFoam part of functionality stops and IFoam once begins. Might be
+pythonFlu and hybridFlu stay very close together. Some times it is even difficult to
+say, where pythonFlu part of functionality stops and hybridFlu once begins. Might be
 the following cross comparison will get you the better feeling. 
 
-  - IFoam uses pyFoam, while pyFoam not. 
+  - hybridFlu uses pythonFlu, while pythonFlu not. 
 
-  - pyFoam is focused on the Python OpenFOAM wrapping, while IFoam is focused
+  - pythonFlu is focused on the Python OpenFOAM wrapping, while hybridFlu is focused
     on the implementation of standard engineering procedures and scenarios. 
 
-  - pyFoam helps you write and manage your solver, while IFoam solves your
+  - pythonFlu helps you write and manage your solver, while hybridFlu solves your
     engineering problem as the whole. 
 
-  - pyFoam is a solver development framework, IFoam is calculation
+  - pythonFlu is a solver development framework, hybridFlu is calculation
     establishment framework. 
 
-IFoam uses pyFoam because it provides the full control over solver. But the
+hybridFlu uses pythonFlu because it provides the full control over solver. But the
 most important advantage of this cooperation is that the "use-case" scripting
 and "methods" programming are performed in the same environment and, as we
 have already mentioned, "it is difficult to say where "methods" programming
@@ -116,7 +116,7 @@ SALOME compatible
 
 SALOME represents itself as "a generic platform for Pre- and Post-Processing
 for numerical simulation, which is based on an open and flexible architecture
-made of reusable components". The key SALOME feature for IFoam, is that SALOME
+made of reusable components". The key SALOME feature for hybridFlu, is that SALOME
 provides Python interface for the most of their functionality. So, it is
 possible to access for free to such commonly used in engineering studies
 functionality as: 
@@ -137,7 +137,7 @@ functionality as:
   - SALOME has a modular structure. To introduce a new functionality, in
     principle, it is not necessary care ùà other modules. SALOME module can be
     written in Python. To get direct access to all SALOME platform services
-    and features, IFoam functionality can be embedded within SALOME. It brings
+    and features, hybridFlu functionality can be embedded within SALOME. It brings
     the following seamless advantages: 
 
     * use generic, user-friendly and efficient graphical user interface 
@@ -148,7 +148,7 @@ functionality as:
     * connect to SALOME persistent features (ability save and restore
       engineering studies) 
 
-  - IFoam integration with SALOME provides "ready-to-use" solution for
+  - hybridFlu integration with SALOME provides "ready-to-use" solution for
     definition of engineering studies IDE 
 
 
@@ -156,9 +156,9 @@ functionality as:
 OpenFOAM inside 
 #--------------------------------------------------------------------------------------
 
-IFoam is OpenFOAM inspired and driven calculation framework. It starts from
+hybridFlu is OpenFOAM inspired and driven calculation framework. It starts from
 OpenFOAM use cases and still treats them as basic ones. But that is all,
-because IFoam is going to introduce a different way work organization in
+because hybridFlu is going to introduce a different way work organization in
 engineering practice, it is focused on optimization of the engineering
 activity, it treats the engineering activity as whole, it allows engineers
 focus on their primary goal - investigation of physics phenomena.
@@ -168,14 +168,14 @@ focus on their primary goal - investigation of physics phenomena.
 Installation
 #--------------------------------------------------------------------------------------
 
-See the INSTALL file for more information about building of "IFoam" package.
+See the INSTALL file for more information about building of "hybridFlu" package.
 
 
 #--------------------------------------------------------------------------------------
 Usage
 #--------------------------------------------------------------------------------------
 
-See real-world Python cases into corresponding "IFoam/examples" folder
+See real-world Python cases into corresponding "hybridFlu/examples" folder
 
 
 #--------------------------------------------------------------------------------------
