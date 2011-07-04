@@ -27,7 +27,7 @@ Author(s) :  Alexey PETROV
 
 2011-07-04
 
-* Adjusting to the "changed configuration system" (confFlu package), foam2vtk, unv2foam, foam2med packages
+* Adjusting to the confFlu, pythonFlu, foam2vtk, unv2foam and foam2med packages
   
 * Bug fixing
 
