@@ -23,7 +23,7 @@
 #--------------------------------------------------------------------------------------
 # Process this file with autoconf to produce a configure script
 #--------------------------------------------------------------------------------------
-AC_INIT([IFoam Project], [0.3], [alexey.petrov.nnov@gmail.com], [ifoam])
+AC_INIT([hybridFlu Project], [0.3], [alexey.petrov.nnov@gmail.com], [ifoam])
 
 # AC_CONFIG_AUX_DIR defines an alternative directory where to find the auxiliary
 # scripts such as config.guess, install-sh, ...
@@ -79,11 +79,16 @@ echo "--------------------------------------------------------------------------
 #CONFFLU_CHECK_SALOME_FOAM
 echo 
 
+echo "--------------------------------------------------------------------------------------"
+HYBRIDFLU_CHECK_SOLVER( icoFlux )
+echo 
+
+
 echo "---------------------------- mandatory products --------------------------------"
 CONFFLU_PRINT_SUMMURY( "openfoam_ok pythonflu_ok ipython_ok" )
 echo
 echo "---------------------------- optional products ---------------------------------"
-CONFFLU_PRINT_SUMMURY( "foam2vtk_ok unv2foam_ok foam2med_ok python_pmw_ok python_tkinter_ok salome_geom_ok salome_smesh_ok salome_visu_ok salome_foam_ok" )
+CONFFLU_PRINT_SUMMURY( "foam2vtk_ok unv2foam_ok foam2med_ok python_pmw_ok python_tkinter_ok salome_geom_ok salome_smesh_ok salome_visu_ok salome_foam_ok icoFlux_ok" )
 echo
 echo "--------------------------------------------------------------------------------"
 CONFFLU_CHECK_MANDATORY( "openfoam_ok pythonflu_ok ipython_ok" )
