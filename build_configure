@@ -109,7 +109,25 @@ fi
 
 
 #--------------------------------------------------------------------------------------
+managedflu_include=""
+
+if test "x${MANAGEDFLU_ROOT_DIR}" != "x"; then
+   managedflu_include="-I ${MANAGEDFLU_ROOT_DIR}/admin"
+fi
+
+if test "x${managedflu_include}" = "x" && test -d /usr/local/share/managedFlu/admin; then
+   managedflu_include="-I /usr/local/share/managedFlu/admin"
+fi
+
+if test "${managedflu_include}x" = "x"; then
+   echo "ERROR:managedFlu need to be installed or sourced"
+   exit 0
+fi
+
+
+#--------------------------------------------------------------------------------------
 ${confflu_path}/build_configure \
+     ${managedflu_include} \
      ${pythonflu_include} \
      ${foam2vtk_include} \
      ${unv2foam_include} \
