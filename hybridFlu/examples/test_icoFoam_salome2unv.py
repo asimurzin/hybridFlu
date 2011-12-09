@@ -25,6 +25,7 @@
 
 #--------------------------------------------------------------------------------------
 from hybridFlu.examples.test_icoFoam_base import *
+from Foam import ref
 
 
 #--------------------------------------------------------------------------------------
@@ -76,11 +77,11 @@ class TIcoFoamSolver( TIcoFoamSolverBase ) :
             os.system( "unv2foam %s -case %s" %( an_unv_file_name, a_path ))
             pass
 
-        a_fvMesh = fvMesh( IOobject( word( "" ),
-                                     self.run_time.caseConstant(),
-                                     self.run_time,
-                                     IOobject.NO_READ,
-                                     IOobject.NO_WRITE ) )
+        a_fvMesh = ref.fvMesh( ref.IOobject( ref.word( "" ),
+                                             self.run_time.caseConstant(),
+                                             self.run_time,
+                                             ref.IOobject.MUST_READ,
+                                             ref.IOobject.NO_WRITE ) )
     
         return a_fvMesh, None
 
