@@ -24,7 +24,7 @@
 
 
 #--------------------------------------------------------------------------------------
-from Foam.finiteVolume import *
+from Foam import ref, man
 
 
 #--------------------------------------------------------------------------------------
@@ -41,19 +41,16 @@ if __name__ == "__main__" :
         argv = [ __file__, '-case', a_dir ]
         pass
     
-    from Foam.OpenFOAM.include import setRootCase
-    args = setRootCase( len( argv ), argv )
+    args = ref.setRootCase( len( argv ), argv )
 
-    from Foam.OpenFOAM.include import createTime
-    runTime = createTime( args )
+    runTime = man.createTime( args )
 
     a_path = str( runTime.path() )
     a_root_dir, a_case = os.path.split( a_path )
     an_unv_file_name = os.path.join( a_path, "mesh" + os.path.extsep + "unv" )
 
-    from Foam.OpenFOAM import fileName
     import unv2foam
-    a_fvMesh = unv2foam.engine( fileName( an_unv_file_name ), runTime )
+    a_fvMesh = unv2foam.engine( ref.fileName( an_unv_file_name ), runTime )
 
     print "OK"
     os._exit( os.EX_OK )
