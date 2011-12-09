@@ -46,11 +46,11 @@ class TIcoFoamSolver( TIcoFoamSolverBase ) :
         Creates fvMesh
         """
         # Read temporary mesh from file - done only so we can get the list of points, faces and cells
-        a_fvMesh = fvMesh( IOobject( word( "" ),
-                                    self.run_time.caseConstant(),
-                                    self.run_time,
-                                    IOobject.NO_READ,
-                                    IOobject.NO_WRITE ) )
+        a_fvMesh = ref.fvMesh( ref.IOobject( ref.word( "" ),
+                                            self.run_time.caseConstant(),
+                                            self.run_time,
+                                            ref.IOobject.MUST_READ,
+                                            ref.IOobject.NO_WRITE ) )
     
         return a_fvMesh, None
 
