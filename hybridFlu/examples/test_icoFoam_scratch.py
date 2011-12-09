@@ -37,102 +37,104 @@ if SalomeVersion() > '5.1.4':
     pass
 
 
-from Foam.OpenFOAM import *
-from Foam.finiteVolume import *
+from Foam import man, ref 
 
 from Tkinter import *
 import Pmw
 
 # Helper function
-# Convert a python string array to tokenList
-def pyTokenList(pyList):
+# Convert a python string array to ITstream
+def createITstream(pyList):
     size = len(pyList)
-    ret = tokenList(size)
+    ret = ref.tokenList(size)
     for i in xrange(size):
-        ret[i] = token(word(pyList[i]))
-    return ret
+        ret[i] = ref.token(ref.word(pyList[i]))
+        pass
+    
+    stream = ref.ITstream( ref.word( "dummy"), ret )
+    return stream
 
 # Convert a python string array to wordList
 def pyWordList(pyList):
     size = len(pyList)
-    ret = wordList(size)
+    ret = ref.wordList(size)
     for i in xrange(size):
-        ret[i] = word(pyList[i])
+        ret[i] = ref.word(pyList[i])
     return ret
 
 # Create fvSchemes dictionary
 def createFvSchemesDict(runTime):
-    fvSchemesDict = IOdictionary(IOobject(word("fvSchemes"),
-                            runTime.caseSystem(),
-                            runTime,
-                            IOobject.NO_READ,
-                            IOobject.AUTO_WRITE))
+    fvSchemesDict = ref.IOdictionary( ref.IOobject(ref.word("fvSchemes"),
+                                      runTime.caseSystem(),
+                                      runTime,
+                                      ref.IOobject.NO_READ,
+                                      ref.IOobject.AUTO_WRITE))
     
     
-    ddtSchemes = dictionary()
-    ddtSchemes.add(word("default"), word("Euler"))
+    ddtSchemes = ref.dictionary()
+    ddtSchemes.add(ref.word("default"), ref.word("Euler"))
     
-    interpolationSchemes = dictionary()
-    interpolationSchemes.add(word("default"),word("linear"))
+    interpolationSchemes = ref.dictionary()
+    interpolationSchemes.add(ref.word("default"),ref.word("linear"))
     
-    gradSchemes = dictionary()
-    gradSchemes.add(word("default"), pyTokenList(["Gauss","linear"]))
-    gradSchemes.add(word("grad(p)"), pyTokenList(["Gauss","linear"]))
+    gradSchemes = ref.dictionary()
+    gradSchemes.add(ref.word("default"), createITstream(["Gauss","linear"]))
+    gradSchemes.add(ref.word("grad(p)"), createITstream(["Gauss","linear"]))
     
-    snGradSchemes = dictionary()
-    snGradSchemes.add(word("default"), word("corrected"))
+    snGradSchemes = ref.dictionary()
+    snGradSchemes.add(ref.word("default"), ref.word("corrected"))
     
-    divSchemes = dictionary()
-    divSchemes.add(word("default"), word("none"))
-    divSchemes.add(word("div(phi,U)"), pyTokenList(["Gauss","linear"]))
+    divSchemes = ref.dictionary()
+    divSchemes.add(ref.word("default"), ref.word("none"))
+    divSchemes.add(ref.word("div(phi,U)"), createITstream(["Gauss","linear"]))
     
-    laplacianSchemes = dictionary()
-    laplacianSchemes.add(word("default"), word("none"))
-    laplacianSchemes.add(word("laplacian(nu,U)"), pyTokenList(["Gauss","linear","corrected"]))
-    laplacianSchemes.add(word("laplacian((1|A(U)),p)"), pyTokenList(["Gauss","linear","corrected"]))
+    laplacianSchemes = ref.dictionary()
+    laplacianSchemes.add(ref.word("default"), ref.word("none"))
+    laplacianSchemes.add(ref.word("laplacian(nu,U)"), createITstream(["Gauss","linear","corrected"]))
+    laplacianSchemes.add(ref.word("laplacian((1|A(U)),p)"), createITstream(["Gauss","linear","corrected"]))
     
-    fluxRequired = dictionary()
-    fluxRequired.add(word("default"), word("no"))
-    fluxRequired.add(word("p"), word())
+    fluxRequired = ref.dictionary()
+    fluxRequired.add(ref.word("default"), ref.word("no"))
+    fluxRequired.add(ref.word("p"), ref.word())
     
-    fvSchemesDict.add(word("ddtSchemes"), ddtSchemes)
-    fvSchemesDict.add(word("interpolationSchemes"), interpolationSchemes)
-    fvSchemesDict.add(word("gradSchemes"), gradSchemes)
-    fvSchemesDict.add(word("snGradSchemes"), snGradSchemes)
-    fvSchemesDict.add(word("laplacianSchemes"), laplacianSchemes)
-    fvSchemesDict.add(word("divSchemes"), divSchemes)
-    fvSchemesDict.add(word("fluxRequired"), fluxRequired)
+    fvSchemesDict.add(ref.word("ddtSchemes"), ddtSchemes)
+    fvSchemesDict.add(ref.word("interpolationSchemes"), interpolationSchemes)
+    fvSchemesDict.add(ref.word("gradSchemes"), gradSchemes)
+    fvSchemesDict.add(ref.word("snGradSchemes"), snGradSchemes)
+    fvSchemesDict.add(ref.word("laplacianSchemes"), laplacianSchemes)
+    fvSchemesDict.add(ref.word("divSchemes"), divSchemes)
+    fvSchemesDict.add(ref.word("fluxRequired"), fluxRequired)
     
     return fvSchemesDict
 
 
 # Create fvSolution dictionary
 def createFvSolution(runTime):
-    USolver = dictionary()
-    USolver.add(word("preconditioner"), word("DILU"))
-    USolver.add(word("minIter"), 0)
-    USolver.add(word("maxIter"), 1000)
-    USolver.add(word("tolerance"), 1E-5)
-    USolver.add(word("relTol"), 0)
+    USolver = ref.dictionary()
+    USolver.add(ref.word("preconditioner"), ref.word("DILU"))
+    USolver.add(ref.word("minIter"), 0)
+    USolver.add(ref.word("maxIter"), 1000)
+    USolver.add(ref.word("tolerance"), 1E-5)
+    USolver.add(ref.word("relTol"), 0)
     
-    pSolver = dictionary()
-    pSolver.add(word("preconditioner"), word("DIC"))
-    pSolver.add(word("minIter"), 0)
-    pSolver.add(word("maxIter"), 1000)
-    pSolver.add(word("tolerance"), 1E-6)
-    pSolver.add(word("relTol"), 0)
+    pSolver = ref.dictionary()
+    pSolver.add(ref.word("preconditioner"), ref.word("DIC"))
+    pSolver.add(ref.word("minIter"), 0)
+    pSolver.add(ref.word("maxIter"), 1000)
+    pSolver.add(ref.word("tolerance"), 1E-6)
+    pSolver.add(ref.word("relTol"), 0)
     
-    piso = dictionary()
-    piso.add(word("nCorrectors"), 2)
-    piso.add(word("nNonOrthogonalCorrectors"), 0)
+    piso = ref.dictionary()
+    piso.add(ref.word("nCorrectors"), 2)
+    piso.add(ref.word("nNonOrthogonalCorrectors"), 0)
     
-    fvSolnDict = dictionary()
-    fvSolnDict.add(word("PISO"), piso)
+    fvSolnDict = ref.dictionary()
+    fvSolnDict.add(ref.word("PISO"), piso)
     
-    soln=ext_solution(runTime, fileName("fvSolution"), fvSolnDict)
-    soln.setWriteOpt(IOobject.AUTO_WRITE)
-    soln.addSolver(word("U"), word("PBiCG"), USolver)
-    soln.addSolver(word("p"), word("PCG"), pSolver)
+    soln=ref.ext_solution(runTime, ref.fileName("fvSolution"), fvSolnDict)
+    soln.setWriteOpt(ref.IOobject.AUTO_WRITE)
+    soln.addSolver(ref.word("U"), ref.word("PBiCG"), USolver)
+    soln.addSolver(ref.word("p"), ref.word("PCG"), pSolver)
     
     return soln
 
@@ -140,11 +142,11 @@ def createFvSolution(runTime):
 # Create fvMesh
 def createFvMesh(runTime):
     # Read temporary mesh from file - done only so we can get the list of points, faces and cells
-    tmpMesh = fvMesh(IOobject(word("tmp"),
-                        runTime.caseConstant(),
-                        runTime,
-                        IOobject.NO_READ,
-                        IOobject.NO_WRITE))
+    tmpMesh = ref.fvMesh( ref.IOobject( ref.word("tmp"),
+                                        runTime.caseConstant(),
+                                        runTime,
+                                        ref.IOobject.NO_READ,
+                                        ref.IOobject.NO_WRITE))
     
     # Get points, faces & Cells - SFOAM implementation should populate these lists from Salome mesh
     points = tmpMesh.points()
@@ -152,48 +154,47 @@ def createFvMesh(runTime):
     cells = tmpMesh.cells()
     
     #  Now create the mesh - Nothing read from file, although fvSchemes and fvSolution created above must be present
-    mesh = fvMesh(IOobject(word("region0"),
-                        runTime.caseConstant(),
-                        runTime,
-                        IOobject.NO_READ,
-                        IOobject.AUTO_WRITE),
-                points,
-                faces,
-                cells
-                )
+    mesh = man.fvMesh( man.IOobject( ref.word("region0"),
+                                     runTime.caseConstant(),
+                                     runTime,
+                                     ref.IOobject.MUST_READ,
+                                     ref.IOobject.AUTO_WRITE ),
+                       points,
+                       faces,
+                       cells )
     
     # Create boundary patches
-    patches = polyPatchListPtr( 4, polyPatch.nullPtr() )
-    patches.set(0, polyPatch.New(
-                    word("patch"),
-                    word("inlet_F"),
+    patches = ref.polyPatchListPtr( 4, ref.polyPatch.nullPtr() )
+    patches.set(0, ref.polyPatch.New(
+                    ref.word("patch"),
+                    ref.word("inlet_F"),
                     606,
                     102308,
                     0,
                     mesh.boundaryMesh()
                     ))
     
-    patches.set(1, polyPatch.New(
-                    word("patch"),
-                    word("outlet_F1"),
+    patches.set(1, ref.polyPatch.New(
+                    ref.word("patch"),
+                    ref.word("outlet_F1"),
                     818,
                     102914,
                     1,
                     mesh.boundaryMesh()
                     ))
     
-    patches.set(2, polyPatch.New(
-                    word("patch"),
-                    word("outlet_F2"),
+    patches.set(2, ref.polyPatch.New(
+                    ref.word("patch"),
+                    ref.word("outlet_F2"),
                     522,
                     103732,
                     2,
                     mesh.boundaryMesh()
                     ))
     
-    patches.set(3, polyPatch.New(
-                    word("wall"),
-                    word("pipe"),
+    patches.set(3, ref.polyPatch.New(
+                    ref.word("wall"),
+                    ref.word("pipe"),
                     5842,
                     104254,
                     3,
@@ -204,30 +205,41 @@ def createFvMesh(runTime):
     
     return mesh, patches
 
+def _createControlDict() :
+    """
+    Creates controlDict dictionary
+    """
+    a_controlDict = ref.dictionary()
+    a_controlDict.add( ref.word( "startFrom" ), ref.word( "startTime" ) )
+    a_controlDict.add( ref.word( "startTime" ), 0.0 )
+    a_controlDict.add( ref.word( "stopAt" ), ref.word( "endTime" ) )
+    a_controlDict.add( ref.word( "endTime" ), 0.05 )
+    a_controlDict.add( ref.word( "deltaT" ), 0.01 )
+    a_controlDict.add( ref.word( "writeControl" ), ref.word( "timeStep" ) )
+    a_controlDict.add( ref.word( "writeInterval" ), 5 )
+
+    return a_controlDict
 
 # Create root and case
 import os
-root = fileName( os.path.join( os.environ[ "HYBRIDFLU_ROOT_DIR" ], 'hybridFlu', 'examples' ) )
-case = fileName( "case_icoFoam_scratch" )
+from Foam import ref
+root = ref.fileName( os.path.join( os.environ[ "HYBRIDFLU_ROOT_DIR" ], 'hybridFlu', 'examples' ) )
+case = ref.fileName( "case_icoFoam_scratch" )
 
 
 # Create time - without reading controlDict from file
 # Note - controlDict not written to file using this method
-runTime = Time(root, case)
-runTime.setTime(0.0, 0)
-runTime.setDeltaT(0.001)
-runTime.setEndTime(0.05)
-
+runTime = man.Time( _createControlDict(), root, case )
 
 # Create transport properties
-transportProperties = IOdictionary(IOobject(word("transportProperties"),
+transportProperties = ref.IOdictionary(ref.IOobject(ref.word("transportProperties"),
                                             runTime.caseConstant(),
                                             runTime,
-                                            IOobject.NO_READ,
-                                            IOobject.NO_WRITE))
+                                            ref.IOobject.NO_READ,
+                                            ref.IOobject.NO_WRITE))
 
-nu = dimensionedScalar(word("nu"), dimensionSet( 0.0, 2.0, -1.0, 0.0, 0.0, 0.0, 0.0), 1e-6)
-transportProperties.add(word("nu"), nu);
+nu = ref.dimensionedScalar(ref.word("nu"),ref.dimensionSet( 0.0, 2.0, -1.0, 0.0, 0.0, 0.0, 0.0), 1e-6)
+transportProperties.add(ref.word("nu"), nu);
 
 
 # Create fvSchemes and fvSolution dictionaries
@@ -250,15 +262,14 @@ mesh.write()
 # Create pressure field
 pPatchTypes = pyWordList(['zeroGradient', 'fixedValue', 'fixedValue', 'zeroGradient'])
 
-p = volScalarField(IOobject(word("p"),
-                            fileName(runTime.timeName()),
-                            mesh,
-                            IOobject.NO_READ,
-                            IOobject.AUTO_WRITE),
-                       mesh,
-                       dimensionedScalar(word(), dimensionSet( 0.0, 2.0, -2.0, 0.0, 0.0, 0.0, 0.0 ), 101.325),
-                       pPatchTypes
-                   )
+p = man.volScalarField( man.IOobject( ref.word("p"),
+                                      ref.fileName(runTime.timeName()),
+                                      mesh,
+                                      ref.IOobject.NO_READ,
+                                      ref.IOobject.AUTO_WRITE),
+                        mesh,
+                        ref.dimensionedScalar( ref.word(), ref.dimensionSet( 0.0, 2.0, -2.0, 0.0, 0.0, 0.0, 0.0 ), 101.325),
+                        pPatchTypes )
 
 p.ext_boundaryField()[1].ext_assign( 101.325 )
 p.ext_boundaryField()[2].ext_assign( 101.325 )
@@ -266,21 +277,19 @@ p.ext_boundaryField()[2].ext_assign( 101.325 )
 # Create velocity field
 UPatchTypes = pyWordList(['fixedValue', 'zeroGradient', 'zeroGradient', 'fixedValue'])
 
-U = volVectorField(IOobject(word("U"),
-                            fileName(runTime.timeName()),
-                            mesh,
-                            IOobject.NO_READ,
-                            IOobject.AUTO_WRITE),
+U = man.volVectorField( man.IOobject( ref.word("U"),
+                                      ref.fileName(runTime.timeName()),
+                                      mesh,
+                                      ref.IOobject.NO_READ,
+                                      ref.IOobject.AUTO_WRITE),
                        mesh,
-                       dimensionedVector(word(), dimensionSet( 0.0, 1.0, -1.0, 0.0, 0.0, 0.0, 0.0 ), vector( 0.0, 0.0, 0.0 ) ),
-                       UPatchTypes
-                   )
+                       ref.dimensionedVector( ref.word(), ref.dimensionSet( 0.0, 1.0, -1.0, 0.0, 0.0, 0.0, 0.0 ), ref.vector( 0.0, 0.0, 0.0 ) ),
+                       UPatchTypes )
 
-U.ext_boundaryField()[0].ext_assign( vector( 0.0, 0.1, 0.0 ) )
-U.ext_boundaryField()[3].ext_assign( vector( 0.0, 0.0, 0.0 ) )
+U.ext_boundaryField()[0] << ref.vector( 0.0, 0.1, 0.0 )
+U.ext_boundaryField()[3] << ref.vector( 0.0, 0.0, 0.0 )
 
-from Foam.finiteVolume.cfdTools.incompressible import createPhi
-phi = createPhi( runTime, mesh, U )
+phi = ref.createPhi( runTime, mesh, U )
 
 # Write all dictionaries to file
 runTime.writeNow()
