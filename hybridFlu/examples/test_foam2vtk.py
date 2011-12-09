@@ -24,35 +24,32 @@
 
 
 #---------------------------------------------------------------------------
+from Foam import ref, man
+
+
+#---------------------------------------------------------------------------
 def main_standalone( argc, argv ):
-    from Foam.OpenFOAM.include import setRootCase
-    args = setRootCase( argc, argv )
+    args = ref.setRootCase( argc, argv )
 
-    from Foam.OpenFOAM.include import createTime
-    runTime = createTime( args )
+    runTime = man.createTime( args )
 
-    from Foam.OpenFOAM.include import createMesh
-    mesh = createMesh( runTime )
+    mesh = man.createMesh( runTime )
 
     # Read pressure field
-    from Foam.OpenFOAM import IOobject, word, fileName
-    from Foam.finiteVolume import volScalarField
-    p = volScalarField( IOobject( word( "p" ),
-                                  fileName( runTime.timeName() ),
-                                  mesh,
-                                  IOobject.MUST_READ,
-                                  IOobject.NO_WRITE ),
-                        mesh )
+    p = man.volScalarField( man.IOobject( ref.word( "p" ),
+                                          ref.fileName( runTime.timeName() ),
+                                          mesh,
+                                          ref.IOobject.MUST_READ,
+                                          ref.IOobject.NO_WRITE ),
+                            mesh )
     
     # Read velocity field
-    from Foam.OpenFOAM import IOobject, word, fileName
-    from Foam.finiteVolume import volVectorField
-    U = volVectorField( IOobject( word( "U" ),
-                                  fileName( runTime.timeName() ),
-                                  mesh,
-                                  IOobject.MUST_READ,
-                                  IOobject.NO_WRITE ),
-                        mesh )
+    U = man.volVectorField( man.IOobject( ref.word( "U" ),
+                                          ref.fileName( runTime.timeName() ),
+                                          mesh,
+                                          ref.IOobject.MUST_READ,
+                                          ref.IOobject.NO_WRITE ),
+                            mesh )
 
     from hybridFlu.vtkPlotter import field_plotter
     pPlot = field_plotter( p )
