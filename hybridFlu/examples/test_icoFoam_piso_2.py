@@ -35,8 +35,8 @@ if SalomeVersion() > '5.1.4':
     os._exit( os.EX_OK )
     pass
 
-from Foam.OpenFOAM import *
-from Foam.finiteVolume import *
+from Foam import ref, man
+
 from Foam import fvm, fvc
 
 from Tkinter import *
@@ -64,24 +64,24 @@ class pyIcoFoam:
         runTime_.increment()
         
         # Read transport properties
-        nu = dimensionedScalar(self.transportProperties.lookup(word("nu")))
+        nu = ref.dimensionedScalar(self.transportProperties.lookup(ref.word("nu")))
 
-        tmp_UEqn = ( fvm.ddt( U_ ) + fvm.div( phi_, U_ ) - fvm.laplacian( nu, U_ ) )
+        tmp_UEqn = ( ref.fvm.ddt( U_ ) + ref.fvm.div( phi_, U_ ) - ref.fvm.laplacian( nu, U_ ) )
         UEqn = tmp_UEqn()
         
-        self.velocityRes = solve( UEqn == -fvc.grad( p_ ) ).initialResidual()
+        self.velocityRes = ref.solve( UEqn == -ref.fvc.grad( p_ ) ).initialResidual()
         
         # --- PISO loop
         for corr in range(nCorr):
             tmp_rUA = 1.0 / UEqn.A()
             rUA = tmp_rUA()
             
-            U_.ext_assign( rUA * UEqn.H() )
+            U_ << rUA * UEqn.H()
             
-            phi_.ext_assign( fvc.interpolate(U_) & mesh_.Sf() )
+            phi_ << ( ref.fvc.interpolate(U_) & mesh_.Sf() )
             
             for nonOrth in range(nNonOrthCorr):
-                tmp_pEqn = ( fvm.laplacian( rUA, p_ ) == fvc.div( phi_ ) )
+                tmp_pEqn = ( ref.fvm.laplacian( rUA, p_ ) == ref.fvc.div( phi_ ) )
                 pEqn = tmp_pEqn()
                 
                 pEqn.setReference( self.pRefCell, self.pRefValue )
@@ -91,10 +91,10 @@ class pyIcoFoam:
                     self.pressureRes = pressureRes
                 
                 if nonOrth == nNonOrthCorr:
-                    phi_.ext_assign( phi_ - pEqn.flux() )
+                    phi_ -= pEqn.flux()
             
             # Continuity errors
-            tmp_contErr = fvc.div( phi_ );
+            tmp_contErr = ref.fvc.div( phi_ );
             contErr = tmp_contErr()
 
             sumLocalContErr = (
@@ -110,62 +110,61 @@ class pyIcoFoam:
             print "time step continuity errors : sum local = " + str(sumLocalContErr) + ", global = " + str(globalContErr)
             
             # Correct velocity
-            U_.ext_assign( U_ - rUA * fvc.grad( p_ ) )
+            U_-= rUA * ref.fvc.grad( p_ )
             U_.correctBoundaryConditions()
 
 
 # Create root and case
 import os
-root = fileName( os.path.join( os.environ[ "HYBRIDFLU_ROOT_DIR" ], 'hybridFlu', 'examples' ) )
-case = fileName( "case_icoFoam_piso" )
+root = ref.fileName( os.path.join( os.environ[ "HYBRIDFLU_ROOT_DIR" ], 'hybridFlu', 'examples' ) )
+case = ref.fileName( "case_icoFoam_piso" )
 
 # Create time
-runTime = Time(word("controlDict"), root, case)
+runTime = man.Time(ref.word("controlDict"), root, case)
 
-runTime.controlDict().remove(word("startTime"))
-runTime.controlDict().remove(word("endTime"))
-runTime.controlDict().remove(word("deltaT"))
-runTime.controlDict().add(word("startTime"), 0)
-runTime.controlDict().add(word("endTime"), 0.5)
-runTime.controlDict().add(word("deltaT"), 0.005)
+runTime.controlDict().remove(ref.word("startTime"))
+runTime.controlDict().remove(ref.word("endTime"))
+runTime.controlDict().remove(ref.word("deltaT"))
+runTime.controlDict().add(ref.word("startTime"), 0)
+runTime.controlDict().add(ref.word("endTime"), 0.5)
+runTime.controlDict().add(ref.word("deltaT"), 0.005)
 
 runTime.read()
 
 # Create mesh
-mesh = fvMesh(IOobject(word("region0"),
-                       fileName(runTime.timeName()),
-                       runTime,
-                       IOobject.NO_READ,
-                       IOobject.NO_WRITE))
+mesh = man.fvMesh( man.IOobject( ref.word("region0"),
+                                 ref.fileName(runTime.timeName()),
+                                 runTime,
+                                 ref.IOobject.MUST_READ,
+                                 ref.IOobject.NO_WRITE))
 
 # Create transport properties
-transportProperties = IOdictionary(IOobject(word("transportProperties"),
-                                            fileName(runTime.constant()),
-                                            mesh,
-                                            IOobject.MUST_READ,
-                                            IOobject.AUTO_WRITE))
+transportProperties = ref.IOdictionary(ref.IOobject( ref.word("transportProperties"),
+                                                     ref.fileName(runTime.constant()),
+                                                     mesh,
+                                                     ref.IOobject.MUST_READ,
+                                                     ref.IOobject.AUTO_WRITE))
 
-nu = dimensionedScalar(transportProperties.lookup(word("nu")))
+nu = ref.dimensionedScalar(transportProperties.lookup(ref.word("nu")))
 nu.setValue(0.05)
 
 # Create pressure field: read
-p = volScalarField(IOobject(word("p"),
-                            fileName(runTime.timeName()),
-                            mesh,
-                            IOobject.MUST_READ,
-                            IOobject.AUTO_WRITE),
-                   mesh)
+p = man.volScalarField( man.IOobject( ref.word("p"),
+                                      ref.fileName(runTime.timeName()),
+                                      mesh,
+                                      ref.IOobject.MUST_READ,
+                                      ref.IOobject.AUTO_WRITE ),
+                        mesh )
 
 # Create velocity field: read
-U = volVectorField(IOobject(word("U"),
-                            fileName(runTime.timeName()),
-                            mesh,
-                            IOobject.MUST_READ,
-                            IOobject.AUTO_WRITE),
-                   mesh)
+U = man.volVectorField( man.IOobject( ref.word("U"),
+                                      ref.fileName(runTime.timeName()),
+                                      mesh,
+                                      ref.IOobject.MUST_READ,
+                                      ref.IOobject.AUTO_WRITE ),
+                        mesh)
 
-from Foam.finiteVolume.cfdTools.incompressible import createPhi
-phi = createPhi( runTime, mesh, U )
+phi = ref.createPhi( runTime, mesh, U )
 
 print "Time: " + str(runTime.timeName())
 
