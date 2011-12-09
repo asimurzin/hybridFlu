@@ -24,6 +24,7 @@
 
 
 #--------------------------------------------------------------------------------------
+from Foam import ref, man
 from salome_version import getVersion as SalomeVersion
 if SalomeVersion() > '5.1.4':
     import os
@@ -31,67 +32,63 @@ if SalomeVersion() > '5.1.4':
     os._exit( os.EX_OK )
     pass
 
-from Foam.OpenFOAM import *
-from Foam.finiteVolume import *
-
 from Tkinter import *
 import Pmw
 
 # Create root and case
 import os
-root = fileName( os.path.join( os.environ[ "HYBRIDFLU_ROOT_DIR" ], 'hybridFlu', 'examples' ) )
-case = fileName( "case_icoFoam_piso" )
+root = ref.fileName( os.path.join( os.environ[ "HYBRIDFLU_ROOT_DIR" ], 'hybridFlu', 'examples' ) )
+case = ref.fileName( "case_icoFoam_piso" )
 
 # Create time
-runTime = Time(word("controlDict"), root, case)
+runTime = man.Time( ref.word("controlDict"), root, case)
 
 # Create mesh
-mesh = fvMesh(IOobject(word("region0"),
-                       fileName(runTime.timeName()),
-                       runTime,
-                       IOobject.NO_READ,
-                       IOobject.NO_WRITE))
+mesh = man.fvMesh( man.IOobject( ref.word("region0"),
+                                 ref.fileName(runTime.timeName()),
+                                 runTime,
+                                 ref.IOobject.MUST_READ,
+                                 ref.IOobject.NO_WRITE ) )
 
 # Create transport properties
-transportProperties = IOdictionary(IOobject(word("transportProperties"),
-                                            fileName(runTime.constant()),
-                                            mesh, IOobject.MUST_READ,
-                                            IOobject.AUTO_WRITE))
+transportProperties = ref.IOdictionary( ref.IOobject( ref.word("transportProperties"),
+                                                      ref.fileName(runTime.constant()),
+                                                      mesh, ref.IOobject.MUST_READ,
+                                                      ref.IOobject.AUTO_WRITE))
 
-nu = dimensionedScalar(transportProperties.lookup(word("nu")))
+nu = ref.dimensionedScalar( transportProperties.lookup( ref.word( "nu" ) ) )
 print nu.value()
 
 nu.setValue(0.05)
-transportProperties.remove(word("nu"))
-transportProperties.add(word("nu"), nu)
+transportProperties.remove( ref.word( "nu" ) )
+transportProperties.add( ref.word( "nu" ), nu )
 
 # Create pressure field: read
-p = volScalarField(IOobject(word("p"),
-                            fileName(runTime.timeName()),
-                            mesh,
-                            IOobject.MUST_READ,
-                            IOobject.AUTO_WRITE),
-                   mesh)
+p = man.volScalarField( man.IOobject( ref.word("p"),
+                                      ref.fileName(runTime.timeName()),
+                                      mesh,
+                                      ref.IOobject.MUST_READ,
+                                      ref.IOobject.AUTO_WRITE),
+                        mesh )
 
 # Create velocity field: read
-U = volVectorField(IOobject(word("U"),
-                            fileName(runTime.timeName()),
-                            mesh,
-                            IOobject.MUST_READ,
-                            IOobject.AUTO_WRITE),
-                   mesh)
+U = man.volVectorField( man.IOobject( ref.word( "U" ),
+                                      ref.fileName(runTime.timeName()),
+                                      mesh,
+                                      ref.IOobject.MUST_READ,
+                                      ref.IOobject.AUTO_WRITE),
+                        mesh )
 
-from Foam.finiteVolume.cfdTools.incompressible import createPhi
-phi = createPhi( runTime, mesh, U )
+phi = man.createPhi( runTime, mesh, U )
 
 cd = runTime.controlDict()
 
-cd.remove(word("startTime"))
-cd.add(word("startTime"), 0)
-cd.remove(word("endTime"))
-cd.add(word("endTime"), 0.5 )
-cd.remove(word("deltaT"))
-cd.add(word("deltaT"), 0.005 )
+cd.remove( ref.word( "startTime" ) )
+cd.add( ref.word( "startTime" ), 0)
+cd.remove(ref.word( "endTime" ) )
+cd.add(ref.word( "endTime" ), 0.5 )
+cd.remove( ref.word( "deltaT" ) )
+cd.add( ref.word( "deltaT" ), 0.005)
 
 runTime.read()
 
