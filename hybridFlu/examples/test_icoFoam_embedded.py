@@ -25,8 +25,6 @@
 
 #--------------------------------------------------------------------------------------
 from Foam import ref, man
-from Foam.OpenFOAM import *
-from Foam.finiteVolume import *
 
 # Helper function
 def createITstream(pyList):
@@ -145,11 +143,11 @@ def _createControlDict() :
 # Create fvMesh
 def createFvMesh(runTime):
     # Read temporary mesh from file - done only so we can get the list of points, faces and cells
-    tmpMesh = ref.fvMesh(ref.IOobject(ref.word("tmp"),
-                         runTime.caseConstant(),
-                         runTime,
-                         ref.IOobject.NO_READ,
-                         ref.IOobject.NO_WRITE))
+    tmpMesh = man.fvMesh( man.IOobject( ref.word("tmp"),
+                                        runTime.caseConstant(),
+                                        runTime,
+                                        ref.IOobject.NO_READ,
+                                        ref.IOobject.NO_WRITE ) )
     
     # Get points, faces & Cells - SFOAM implementation should populate these lists from Salome mesh
     points = tmpMesh.points()
@@ -157,14 +155,15 @@ def createFvMesh(runTime):
     cells = tmpMesh.cells()
     
     #  Now create the mesh - Nothing read from file, although fvSchemes and fvSolution created above must be present
-    mesh = man.fvMesh( man.IOobject( ref.word("region0"),
-                                     runTime.caseConstant(),
-                                     runTime,
-                                     ref.IOobject.MUST_READ,
-                                     ref.IOobject.AUTO_WRITE),
-                       points,
-                       faces,
-                       cells )
+    #  It is necessary to store tmpMesh, because fvMesh::points(), faces(), and cells() return const T&
+    #  and fvMesh in next line will be broken, after exiting from this function (tmpMesh are deleted) 
+    mesh = man.fvMesh( ref.fvMesh( ref.IOobject( ref.word("region0"),
+                                                 runTime.caseConstant(),
+                                                 runTime,
+                                                 ref.IOobject.MUST_READ,
+                                                 ref.IOobject.AUTO_WRITE),
+                                   points, faces, cells ),
+                       man.Deps( tmpMesh ) )             
     
     # Create boundary patches
     patches = ref.polyPatchListPtr( 4, ref.polyPatch.nullPtr() )
@@ -253,8 +252,8 @@ p = man.volScalarField( man.IOobject(ref.word("p"),
                         ref.dimensionedScalar(ref.word(), ref.dimensionSet(0.0, 2.0, -2.0, 0.0, 0.0, 0.0, 0.0), 101.325),
                         pPatchTypes )
 
-p.ext_boundaryField()[1].ext_assign( 101.325 )
-p.ext_boundaryField()[2].ext_assign( 101.325 )
+p.ext_boundaryField()[1] << 101.325
+p.ext_boundaryField()[2] << 101.325
 
 # Create velocity field
 UPatchTypes = pyWordList(['fixedValue', 'zeroGradient', 'zeroGradient', 'fixedValue'])
@@ -268,10 +267,10 @@ U = man.volVectorField ( man.IOobject( ref.word("U"),
                          ref.dimensionedVector( ref.word(), ref.dimensionSet( 0.0, 1.0, -1.0, 0.0, 0.0, 0.0, 0.0 ), ref.vector( 0.0, 0.0, 0.0 ) ),
                          UPatchTypes )
 
-U.ext_boundaryField()[0].ext_assign( ref.vector( 0.0, 0.1, 0.0 ) )
-U.ext_boundaryField()[3].ext_assign( ref.vector( 0.0, 0.0, 0.0 ) )
+U.ext_boundaryField()[0] << ref.vector( 0.0, 0.1, 0.0 )
+U.ext_boundaryField()[3] << ref.vector( 0.0, 0.0, 0.0 )
 
-phi = man.createPhi( runTime, mesh, U )
+phi = ref.createPhi( runTime, mesh, U )
 
 # Write all dictionaries to file
 runTime.writeNow()
