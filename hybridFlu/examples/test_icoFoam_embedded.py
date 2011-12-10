@@ -270,7 +270,7 @@ U = man.volVectorField ( man.IOobject( ref.word("U"),
 U.ext_boundaryField()[0] << ref.vector( 0.0, 0.1, 0.0 )
 U.ext_boundaryField()[3] << ref.vector( 0.0, 0.0, 0.0 )
 
-phi = ref.createPhi( runTime, mesh, U )
+phi = man.createPhi( runTime, mesh, U )
 
 # Write all dictionaries to file
 runTime.writeNow()
