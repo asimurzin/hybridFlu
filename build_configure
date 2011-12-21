@@ -47,7 +47,7 @@ if test "x${PYTHONFLU_ROOT_DIR}" != "x"; then
    pythonflu_include="-I ${PYTHONFLU_ROOT_DIR}/admin"
 fi
 
-if test "x${pythonflu_include}" = "x" && test -d /usr/local/share/pythonFlu/admin; then
+if test "x${pythonflu_include}" = "x" && test -d /usr/local/share/pythonflu/admin; then
    pythonflu_include="-I /usr/local/share/pythonFlu/admin"
 fi
 
@@ -115,7 +115,7 @@ if test "x${MANAGEDFLU_ROOT_DIR}" != "x"; then
    managedflu_include="-I ${MANAGEDFLU_ROOT_DIR}/admin"
 fi
 
-if test "x${managedflu_include}" = "x" && test -d /usr/local/share/managedFlu/admin; then
+if test "x${managedflu_include}" = "x" && test -d /usr/local/share/managedflu/admin; then
    managedflu_include="-I /usr/local/share/managedFlu/admin"
 fi
 
