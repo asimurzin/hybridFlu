@@ -30,8 +30,8 @@ if test "x${CONFFLU_ROOT_DIR}" != "x"; then
    confflu_path=${CONFFLU_ROOT_DIR}
 fi
 
-if test "x${confflu_path}" = x && test -f /usr/local/share/confFlu/build_configure; then
-   confflu_path=/usr/local/share/confFlu
+if test "x${confflu_path}" = x && test -f /usr/local/share/confflu/build_configure; then
+   confflu_path=/usr/local/share/confflu
 fi
 
 if test "${confflu_path}x" = "x"; then
@@ -48,7 +48,7 @@ if test "x${PYTHONFLU_ROOT_DIR}" != "x"; then
 fi
 
 if test "x${pythonflu_include}" = "x" && test -d /usr/local/share/pythonflu/admin; then
-   pythonflu_include="-I /usr/local/share/pythonFlu/admin"
+   pythonflu_include="-I /usr/local/share/pythonflu/admin"
 fi
 
 if test "${pythonflu_include}x" = "x"; then
@@ -116,7 +116,7 @@ if test "x${MANAGEDFLU_ROOT_DIR}" != "x"; then
 fi
 
 if test "x${managedflu_include}" = "x" && test -d /usr/local/share/managedflu/admin; then
-   managedflu_include="-I /usr/local/share/managedFlu/admin"
+   managedflu_include="-I /usr/local/share/managedflu/admin"
 fi
 
 if test "${managedflu_include}x" = "x"; then
